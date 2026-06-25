@@ -1,0 +1,62 @@
+{%- comment -%} sections/hb-page-hero.liquid — full-width photo hero for inner pages. Styled by hb-home.css {%- endcomment -%}
+<section class="page-hero{% if section.settings.variant == 'menu' %} page-hero--menu{% endif %}">
+  {%- if section.settings.image != blank -%}
+    {%- capture hero_alt -%}{{ page.title | default: shop.name | escape }}{%- endcapture -%}
+    {{
+      section.settings.image
+      | image_url: width: 2880
+      | image_tag:
+        class: 'page-hero__media',
+        loading: 'eager',
+        alt: hero_alt,
+        widths: '750, 1100, 1500, 2000, 2880',
+        sizes: '100vw'
+    }}
+  {%- elsif section.settings.fallback_asset != blank -%}
+    <img
+      class="page-hero__media"
+      src="{{ section.settings.fallback_asset | asset_url }}"
+      alt=""
+      width="1440"
+      height="779"
+      loading="eager"
+    >
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "HB Page Hero",
+  "tag": "section",
+  "class": "hb-page-hero-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "variant",
+      "label": "Hero height",
+      "options": [
+        { "value": "default", "label": "Default (legal pages)" },
+        { "value": "menu", "label": "Menu page" }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero image (optional — overrides fallback asset below)"
+    },
+    {
+      "type": "text",
+      "id": "fallback_asset",
+      "label": "Fallback asset filename",
+      "info": "Theme asset in /assets, e.g. hb-legal-hero-privacy.jpg",
+      "default": "hb-legal-hero-privacy.jpg"
+    }
+  ],
+  "presets": [
+    {
+      "name": "HB Page Hero"
+    }
+  ]
+}
+{% endschema %}

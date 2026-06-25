@@ -1,0 +1,38 @@
+{%- comment -%}
+  sections/hb-contact.liquid — Contact page body (JotForm / page content).
+  Figma ref: node 17:12260 (desktop) / 17:12450 (mobile). Styled by hb-home.css.
+  Paste the JotForm embed in Online Store → Pages → Contact (HTML/code view).
+{%- endcomment -%}
+
+<section class="contact-page">
+  <div class="container contact-page__inner">
+    {%- if section.settings.embed_code != blank -%}
+      <div class="contact-page__embed">{{ section.settings.embed_code }}</div>
+    {%- endif -%}
+
+    {%- if page.content != blank -%}
+      <div class="contact-page__body rte">{{ page.content }}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HB Contact",
+  "tag": "section",
+  "class": "hb-contact-section",
+  "settings": [
+    {
+      "type": "liquid",
+      "id": "embed_code",
+      "label": "JotForm embed code (optional)",
+      "info": "Use this if the page editor strips script tags from your embed. Otherwise paste the JotForm code in the page body."
+    }
+  ],
+  "presets": [
+    {
+      "name": "HB Contact"
+    }
+  ]
+}
+{% endschema %}

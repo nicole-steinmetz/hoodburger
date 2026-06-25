@@ -1,0 +1,29 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hb-page-hero",
+      "settings": {
+        "fallback_asset": "hb-contact-hero.jpg"
+      }
+    },
+    "cta": {
+      "type": "hb-cta-bar",
+      "settings": {
+        "mobile_only": true,
+        "button_style": "order",
+        "headline": "",
+        "order_label": "ORDER NOW",
+        "order_link": ""
+      }
+    },
+    "contact": {
+      "type": "hb-contact",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "cta",
+    "contact"
+  ]
+}
