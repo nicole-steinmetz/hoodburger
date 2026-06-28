@@ -1,0 +1,86 @@
+/* =====================================================================
+   Hoodburger — Careers page
+   Structure mirrors hb-sponsorships.css (H1 → JotForm embed).
+   No below-form hero block (comp has none).
+   Tokens from hb-home.css :root. DO NOT redefine tokens here.
+   ===================================================================== */
+
+#MainContent[data-template="page.careers"] {
+  padding: 0;
+  margin: 0;
+}
+#MainContent[data-template="page.careers"] > .shopify-section {
+  margin-top: 0 !important;
+  width: 100%;
+  max-width: none;
+}
+
+.careers {
+  background: var(--c-white);
+  color: var(--c-black);
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   1. HEADING — Helvetica Bold, 52px desktop / 50px mobile
+   ───────────────────────────────────────────────────────────────────── */
+.careers__header {
+  padding-top: 53px;
+  text-align: center;
+}
+
+.careers__heading {
+  font-family: var(--font-base);
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 1;
+  color: var(--c-black);
+  margin: 0;
+}
+
+@media (min-width: 990px) {
+  .careers__header {
+    padding-top: 81px;
+  }
+
+  .careers__heading {
+    font-size: 52px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   2. JOTFORM EMBED — directly under heading
+   ───────────────────────────────────────────────────────────────────── */
+.careers__embed {
+  margin-top: 32px;
+  padding-bottom: 64px;
+}
+
+.careers__embed > * {
+  max-width: 100%;
+}
+
+.careers__form {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border: 0;
+}
+
+/* Editor-only placeholder shown when no form ID is set */
+.careers__form-placeholder {
+  font-family: var(--font-base);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--c-hairline);
+  border: 1px dashed var(--c-hairline);
+  border-radius: 10px;
+  padding: 24px;
+  margin: 0;
+}
+
+@media (min-width: 990px) {
+  .careers__embed {
+    margin-top: 40px;
+    padding-bottom: 80px;
+  }
+}

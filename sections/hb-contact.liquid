@@ -1,17 +1,43 @@
 {%- comment -%}
-  sections/hb-contact.liquid — Contact page body (JotForm / page content).
+  sections/hb-contact.liquid — Contact page body with JotForm iframe embed.
   Figma ref: node 17:12260 (desktop) / 17:12450 (mobile). Styled by hb-home.css.
-  Paste the JotForm embed in Online Store → Pages → Contact (HTML/code view).
 {%- endcomment -%}
+
+{%- liquid
+  assign form_url = section.settings.form_url
+  assign form_title = section.settings.form_title | default: 'Contact form'
+  assign iframe_id = section.settings.iframe_id
+  if iframe_id == blank and form_url != blank
+    assign form_id = form_url | split: '/' | last | split: '?' | first
+    assign iframe_id = 'JotFormIFrame-' | append: form_id
+  endif
+-%}
 
 <section class="contact-page">
   <div class="container contact-page__inner">
-    {%- if section.settings.embed_code != blank -%}
-      <div class="contact-page__embed">{{ section.settings.embed_code }}</div>
-    {%- endif -%}
+    <div class="contact-page__header">
+      <h1 class="contact-page__heading">{{ section.settings.heading | default: page.title | default: 'Contact' }}</h1>
+    </div>
 
     {%- if page.content != blank -%}
       <div class="contact-page__body rte">{{ page.content }}</div>
+    {%- endif -%}
+
+    {%- if form_url != blank -%}
+      <div class="contact-page__form">
+        <iframe
+          id="{{ iframe_id }}"
+          class="contact-page__iframe"
+          title="{{ form_title | escape }}"
+          src="{{ form_url }}"
+          loading="lazy"
+          allow="geolocation; microphone; camera; fullscreen; payment"
+          allowtransparency="true"
+          frameborder="0"
+          scrolling="auto"
+          style="--contact-iframe-min-height: {{ section.settings.iframe_min_height }}px;"
+        ></iframe>
+      </div>
     {%- endif -%}
   </div>
 </section>
@@ -23,10 +49,38 @@
   "class": "hb-contact-section",
   "settings": [
     {
-      "type": "liquid",
-      "id": "embed_code",
-      "label": "JotForm embed code (optional)",
-      "info": "Use this if the page editor strips script tags from your embed. Otherwise paste the JotForm code in the page body."
+      "type": "text",
+      "id": "heading",
+      "label": "Page heading",
+      "default": "Contact"
+    },
+    {
+      "type": "text",
+      "id": "form_url",
+      "label": "JotForm URL",
+      "default": "https://form.jotform.com/261763674524060"
+    },
+    {
+      "type": "text",
+      "id": "form_title",
+      "label": "Form title (accessibility)",
+      "default": "Customer Complaint Form"
+    },
+    {
+      "type": "text",
+      "id": "iframe_id",
+      "label": "Iframe ID (optional)",
+      "info": "Defaults to JotFormIFrame-{form id} from the URL above."
+    },
+    {
+      "type": "range",
+      "id": "iframe_min_height",
+      "min": 400,
+      "max": 1200,
+      "step": 20,
+      "unit": "px",
+      "label": "Minimum iframe height",
+      "default": 540
     }
   ],
   "presets": [

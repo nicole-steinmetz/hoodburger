@@ -1,0 +1,106 @@
+/* =====================================================================
+   Hoodburger — Catering page
+   Structure mirrors hb-order-now.css (H1 → embed → hero photo).
+   Tokens from hb-home.css :root. DO NOT redefine tokens here.
+   ===================================================================== */
+
+#MainContent[data-template="page.catering"] {
+  padding: 0;
+  margin: 0;
+}
+#MainContent[data-template="page.catering"] > .shopify-section {
+  margin-top: 0 !important;
+  width: 100%;
+  max-width: none;
+}
+
+.catering {
+  background: var(--c-white);
+  color: var(--c-black);
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   1. HEADING — Helvetica Bold, 52px desktop / 50px mobile
+   ───────────────────────────────────────────────────────────────────── */
+.catering__header {
+  padding-top: 53px;
+  text-align: center;
+}
+
+.catering__heading {
+  font-family: var(--font-base);
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 1;
+  color: var(--c-black);
+  margin: 0;
+}
+
+@media (min-width: 990px) {
+  .catering__header {
+    padding-top: 81px;
+  }
+
+  .catering__heading {
+    font-size: 52px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   2. JOTFORM EMBED — directly under heading
+   ───────────────────────────────────────────────────────────────────── */
+.catering__embed {
+  margin-top: 32px;
+  padding-bottom: 0;
+}
+
+.catering__embed > * {
+  max-width: 100%;
+}
+
+.catering__form {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border: 0;
+}
+
+@media (min-width: 990px) {
+  .catering__embed {
+    margin-top: 40px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   3. HERO PHOTO — below the form (optional)
+   ───────────────────────────────────────────────────────────────────── */
+.catering__hero {
+  position: relative;
+  margin-top: 48px;
+  padding-inline: 20px;
+  padding-bottom: 48px;
+}
+
+.catering__hero-picture {
+  display: block;
+  width: 100%;
+}
+
+.catering__hero-img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 345 / 528;
+}
+
+@media (min-width: 990px) {
+  .catering__hero {
+    margin-top: 64px;
+    padding-inline: var(--margin);
+    padding-bottom: 64px;
+  }
+
+  .catering__hero-img {
+    aspect-ratio: 1280 / 853;
+  }
+}
