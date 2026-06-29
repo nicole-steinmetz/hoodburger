@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hb-page-hero",
+      "settings": {
+        "variant": "default",
+        "fallback_asset": "hb-sponsorships-hero.jpg"
+      }
+    },
+    "cta": {
+      "type": "hb-cta-bar",
+      "settings": {
+        "button_style": "order",
+        "headline": "Eat hamburgers, become a Wizard, get rewards.",
+        "rewards_label": "Rewards",
+        "rewards_link": "/pages/rewards",
+        "order_label": "Order Now",
+        "order_link": "/pages/order-now"
+      }
+    },
+    "body": {
+      "type": "hb-sponsorships",
+      "settings": {
+        "heading": "Sponsorships",
+        "jotform_id": "261770515650052",
+        "form_title": "Sponsorship Application",
+        "form_height": 539,
+        "hero_alt": "Hoodburger sponsorships"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "cta",
+    "body"
+  ]
+}
