@@ -103,7 +103,7 @@
           "type": "item",
           "settings": {
             "label": "Where are Hoodburger's store locations?",
-            "content": "<p>For directions, addresses, and specific store details, check our <a href=\"/pages/locations\">Locations page</a>.</p>",
+            "content": "<p>For directions, addresses, and specific store details, check our <a href=\"/pages/store-locator\">Locations page</a>.</p>",
             "default_open": false
           }
         },
@@ -111,7 +111,7 @@
           "type": "item",
           "settings": {
             "label": "What are Hoodburger's opening hours?",
-            "content": "<p>Hours vary slightly by store. Most open daily from 11am to 9pm, with some staying open until 10pm on Fridays and Saturdays. Up-to-date hours, including public holidays, live on our <a href=\"/pages/locations\">Locations page</a> and each store's Google listing.</p>",
+            "content": "<p>Hours vary slightly by store. Most open daily from 11am to 9pm, with some staying open until 10pm on Fridays and Saturdays. Up-to-date hours, including public holidays, live on our <a href=\"/pages/store-locator\">Locations page</a> and each store's Google listing.</p>",
             "default_open": false
           }
         },
@@ -119,7 +119,7 @@
           "type": "item",
           "settings": {
             "label": "Do you sell beer or wine?",
-            "content": "<p>Some of our stores are licensed and some are BYO. Check our <a href=\"/pages/locations\">Locations page</a> for the liquor licence and BYO status of your nearest Hoodburger.</p>",
+            "content": "<p>Some of our stores are licensed and some are BYO. Check our <a href=\"/pages/store-locator\">Locations page</a> for the liquor licence and BYO status of your nearest Hoodburger.</p>",
             "default_open": false
           }
         },

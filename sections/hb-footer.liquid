@@ -47,7 +47,7 @@
                 {%- liquid
                   assign footer_label_key = label | downcase | strip
                   assign footer_url = url
-                  if footer_label_key contains 'store location' or footer_label_key contains 'locations' or footer_url == '/pages/locations'
+                  if footer_label_key contains 'store location' or footer_label_key contains 'locations' or footer_url == '/pages/locations' or footer_url == '/pages/store-locator'
                     capture footer_url
                       render 'hb-locations-url'
                     endcapture
@@ -157,7 +157,7 @@
             "link_3_label": "Catering",
             "link_3_url": "/pages/catering",
             "link_4_label": "Store Locations",
-            "link_4_url": "/pages/locations"
+            "link_4_url": "/pages/store-locator"
           }
         },
         {
