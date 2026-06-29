@@ -1,0 +1,51 @@
+/*
+ * ------------------------------------------------------------
+ * Our Story / About page — handle MUST be `about` (footer link_1).
+ *
+ * FLAG (confirm): cta_bar.button_style is "order" (red Order Now on desktop)
+ * to match Figma comp node 17:13043. Home uses "rewards". Switch to "rewards"
+ * here if About should mirror Home exactly.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "story_hero": {
+      "type": "hb-story-hero",
+      "settings": {
+        "hero_asset": "hb-story-hero.jpg",
+        "hero_asset_mobile": "hb-story-hero-mobile.jpg",
+        "hero_alt": "Inside a Hoodburger kitchen",
+        "show_badge": false,
+        "earn_points_badge": "hb-earn-points-badge.png",
+        "earn_points_badge_alt": "Earn loyalty points"
+      }
+    },
+    "cta_bar": {
+      "type": "hb-cta-bar",
+      "settings": {
+        "button_style": "order",
+        "headline": "Eat hamburgers, become a Wizard, get rewards.",
+        "rewards_label": "Rewards",
+        "rewards_link": "/pages/rewards",
+        "order_label": "Order Now",
+        "order_link": "/pages/order-now"
+      }
+    },
+    "story_about": {
+      "type": "hb-story-about",
+      "settings": {
+        "image_asset": "hb-story-about.jpg",
+        "image_alt": "Hoodburger team at work",
+        "heading": "About",
+        "body": "<p>From our humble foundations as a one-night pop-up at the back of a Northbridge bar in 2015 to the restaurants you see today, Hoodburger has always had two goals to honour the golden era of fast food and to do it with the best ingredients we can get our hands on. Each store and menu builds on the last, exploring and refining different eras of fast food through design, food and experience.</p>",
+        "instagram_url": "https://www.instagram.com/itshoodburger?igsh=MW95ZjNjYTdtMWl3dw==",
+        "tiktok_url": "https://www.tiktok.com/@itshoodburger?_r=1&_t=ZS-97Vo8wTqUi1"
+      }
+    }
+  },
+  "order": [
+    "story_hero",
+    "cta_bar",
+    "story_about"
+  ]
+}

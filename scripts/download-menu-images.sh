@@ -1,0 +1,60 @@
+#!/bin/bash
+# Download menu product images from Figma export URLs (generated via MCP download_assets)
+set -euo pipefail
+ASSETS="/Users/nicolesteinmetz/Documents/hoodburger-theme/assets"
+cd "$ASSETS"
+
+download() {
+  local file="$1"
+  local url="$2"
+  if [ -f "$file" ] && [ -s "$file" ]; then
+    echo "skip $file"
+    return 0
+  fi
+  echo "fetch $file"
+  curl -fsSL "$url" -o "$file"
+}
+
+download hb-menu-cheeseburger.jpg "https://www.figma.com/api/mcp/asset/04b6728c-2cb5-49be-a08f-dff93e47dc1b"
+download hb-menu-deluxe-cheeseburger.jpg "https://www.figma.com/api/mcp/asset/29782694-21f7-4f24-98ba-8eb178261abb"
+download hb-menu-double-cheeseburger.jpg "https://www.figma.com/api/mcp/asset/c4a070d8-f199-4820-aef2-e0ca7082aad6"
+download hb-menu-hot-cheeseburger.jpg "https://www.figma.com/api/mcp/asset/9554c9b2-aacc-4a54-a3ad-33fd4e47f95d"
+download hb-menu-double-supreme.jpg "https://www.figma.com/api/mcp/asset/1398b0fa-dca4-40f7-aba8-77975aac409e"
+download hb-menu-swiss-mushroom.jpg "https://www.figma.com/api/mcp/asset/7b9d881f-74b7-4a87-86ff-5dd4314562ab"
+download hb-menu-ribwich.jpg "https://www.figma.com/api/mcp/asset/4d32955b-43d1-4e28-9ca1-8311f28703f6"
+download hb-menu-tender-deluxe.jpg "https://www.figma.com/api/mcp/asset/5817e81c-9ac0-4961-a7b1-17a308a8ee48"
+download hb-menu-hot-tender-sandwich.jpg "https://www.figma.com/api/mcp/asset/65adb693-6c8f-4a49-b4d1-7454e0912e17"
+download hb-menu-tender-mash-and-gravy.jpg "https://www.figma.com/api/mcp/asset/ff1ac055-0747-44a3-82ac-b248a6f1ae0b"
+download hb-menu-honey-butter-sandwich.jpg "https://www.figma.com/api/mcp/asset/18ac876f-a2ed-4b12-9220-0ba88a69c123"
+download hb-menu-tender-supreme.jpg "https://www.figma.com/api/mcp/asset/d1faa4b3-3fc9-459b-989d-911f6e083c5d"
+download hb-menu-golden-curry-tender-sandwich.jpg "https://www.figma.com/api/mcp/asset/111b5c43-6dc2-4a49-8ce1-64d785702dd3"
+download hb-menu-kids-burger.jpg "https://www.figma.com/api/mcp/asset/ed4a284c-a35c-4704-b6f2-e620a1c5d1f4"
+download hb-menu-chicken-long.jpg "https://www.figma.com/api/mcp/asset/1bab6d1e-4a93-4d23-b0bc-0e08d1bb47ae"
+download hb-menu-french-fries-large.jpg "https://www.figma.com/api/mcp/asset/57fa9f3d-087c-4f9f-92b7-4fc55aad0688"
+download hb-menu-french-fries-regular.jpg "https://www.figma.com/api/mcp/asset/33911f63-9582-427e-a6ee-0888f9bd7398"
+download hb-menu-french-fries-small.jpg "https://www.figma.com/api/mcp/asset/1fb886cf-965b-469c-a74c-0028ce22db64"
+download hb-menu-dill-pickles-cup.jpg "https://www.figma.com/api/mcp/asset/463c595d-5b40-4148-a29f-a44618b3b50b"
+download hb-menu-chicken-tender-1-pack.jpg "https://www.figma.com/api/mcp/asset/8f0d1cc6-eeb1-47af-a4ad-354e99dba7d4"
+download hb-menu-chicken-tender-2-pack.jpg "https://www.figma.com/api/mcp/asset/2ecc2132-c6f3-418b-81be-47eaccd89ce3"
+download hb-menu-chicken-tender-3-pack.jpg "https://www.figma.com/api/mcp/asset/d70f3575-8240-40d3-8b9b-6daaad8a1927"
+download hb-menu-mash-gravy.jpg "https://www.figma.com/api/mcp/asset/9b68ad8e-6681-409d-ae74-fb95766f9506"
+download hb-menu-jalapeno-mayo-cup.jpg "https://www.figma.com/api/mcp/asset/970369bd-f8da-4e54-bba6-a0a9da29974b"
+download hb-menu-burger-sauce-cup.jpg "https://www.figma.com/api/mcp/asset/44fbe050-095a-44fe-b346-069558ac5200"
+download hb-menu-ranch-cup.jpg "https://www.figma.com/api/mcp/asset/accccc39-24fe-4b5f-89cf-602100709ac4"
+download hb-menu-gravy-cup.jpg "https://www.figma.com/api/mcp/asset/9f7e8ddf-f7d4-435e-810f-5f9f5ad2d53d"
+download hb-menu-hot-smokey-mayo-cup.jpg "https://www.figma.com/api/mcp/asset/739bd5c1-f4e0-4db6-91ba-da09a9719ee9"
+download hb-menu-blue-cheese-cup.jpg "https://www.figma.com/api/mcp/asset/1d2c6feb-08a6-4c4d-b6d9-f4546231b67f"
+download hb-menu-reaper-ketchup-cup.jpg "https://www.figma.com/api/mcp/asset/192b250c-35e4-49e5-9fc4-b47e533147cc"
+download hb-menu-queso-cup.jpg "https://www.figma.com/api/mcp/asset/0d0ba73a-cf88-4727-b267-c7f0aa5dfc19"
+download hb-menu-ketchup-cup.jpg "https://www.figma.com/api/mcp/asset/f8589209-c273-4ca9-bbb9-19badd9f6470"
+download hb-menu-golden-curry-cup.jpg "https://www.figma.com/api/mcp/asset/9f0f971a-8ed8-4089-9b27-9d987bb76263"
+download hb-menu-honey-mustard-cup.jpg "https://www.figma.com/api/mcp/asset/2002bf7d-71ee-43e2-bed7-e02359527ac3"
+download hb-menu-sweet-bbq-cup.jpg "https://www.figma.com/api/mcp/asset/08a35bc4-d5de-4361-916b-2275ffa7a198"
+download hb-menu-dr-pepper.jpg "https://www.figma.com/api/mcp/asset/0d65c7eb-d303-47d4-a579-2fe2152efef4"
+download hb-menu-jarritos.jpg "https://www.figma.com/api/mcp/asset/767f7a51-924c-4caa-9813-1d072dcb4fd3"
+download hb-menu-coke.jpg "https://www.figma.com/api/mcp/asset/5b751b50-2290-4c21-8f64-38ab6f3b8d44"
+download hb-menu-fanta.jpg "https://www.figma.com/api/mcp/asset/d690f50e-fdca-48ad-b6b0-232efae6f506"
+download hb-menu-arizona-grapeade.jpg "https://www.figma.com/api/mcp/asset/4336f465-78bb-4fef-afd9-49fb45975588"
+download hb-menu-passiona.jpg "https://www.figma.com/api/mcp/asset/a55a4905-0acb-4f87-81fc-5f88d1f46150"
+
+echo "Done: $(ls hb-menu-*.jpg 2>/dev/null | wc -l | tr -d ' ') menu images"

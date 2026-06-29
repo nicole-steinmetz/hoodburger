@@ -1,0 +1,115 @@
+{%- comment -%}
+  sections/hb-careers.liquid — Careers page (H1 + JotForm "Jobs" form).
+  Styled by assets/hb-careers.css.
+
+  Layout (top → bottom):
+    1. Page heading — "Careers" (H1, Helvetica Bold, 52px desktop / 50px mobile)
+    2. JotForm jobs form (iframe embed) — sits directly under the heading
+
+  NOTE: the full-width photo at the very top is the global hb-page-hero section,
+  composed in templates/page.careers.json. The Careers comp has NO yellow
+  "become a Wizard" cta-bar (unlike Sponsorships/legal pages).
+
+  Why an iframe + hb-careers.js (and NOT the pasted <script> snippet):
+    - Shopify strips <script> tags from `html` / richtext section settings, so the
+      JotForm jsform/embed snippet cannot live in a setting field.
+    - The iframe is hard-coded here (server-side, indexable wrapper) and the JotForm
+      "embed handler" (which auto-resizes the iframe to the form's height) is loaded
+      by hb-careers.js, which listens for shopify:section:load per theme rules.
+
+  Theme dev rules:
+    - HTML/Liquid first. The iframe is server-side.
+    - All custom JS listens for shopify:section:load.
+    - No Dawn core files touched. Tokens come from hb-home.css :root.
+{%- endcomment -%}
+
+{{ 'hb-careers.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign form_id = section.settings.jotform_id
+  assign form_height = section.settings.form_height | default: 539
+-%}
+
+<div class="careers" id="hb-careers-{{ section.id }}">
+
+  {%- comment -%} ─────────────────── 1. HEADING ─────────────────── {%- endcomment -%}
+  <div class="container careers__header">
+    <h1 class="careers__heading">{{ section.settings.heading | default: 'Careers' }}</h1>
+  </div>
+
+  {%- comment -%} ─────────────────── 2. JOTFORM EMBED ─────────────────── {%- endcomment -%}
+  <div class="container careers__embed">
+    {%- if form_id != blank -%}
+      <iframe
+        id="JotFormIFrame-{{ form_id }}"
+        class="careers__form"
+        title="{{ section.settings.form_title | default: 'Jobs' | escape }}"
+        src="https://form.jotform.com/{{ form_id }}"
+        allow="geolocation; microphone; camera; fullscreen; payment"
+        allowtransparency="true"
+        frameborder="0"
+        scrolling="no"
+        style="min-width:100%;max-width:100%;height:{{ form_height }}px;border:none;"
+        data-jotform-id="{{ form_id }}"
+      ></iframe>
+    {%- else -%}
+      {%- comment -%}
+        No form ID set. Render an editor-only placeholder so the page never
+        accidentally embeds another form, and so the gap is obvious in Customise.
+      {%- endcomment -%}
+      {%- if request.design_mode -%}
+        <p class="careers__form-placeholder">
+          Add the Careers JotForm ID in this section’s settings to embed the form.
+        </p>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+
+</div>
+
+<script src="{{ 'hb-careers.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "HB Careers",
+  "tag": "section",
+  "class": "hb-careers-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Page heading",
+      "default": "Careers"
+    },
+    {
+      "type": "header",
+      "content": "JotForm jobs form"
+    },
+    {
+      "type": "text",
+      "id": "jotform_id",
+      "label": "JotForm form ID",
+      "info": "The numeric ID from the form URL, e.g. 261770384764062. This is the Careers/jobs form — DO NOT reuse the Catering or Sponsorships form IDs.",
+      "default": "261770384764062"
+    },
+    {
+      "type": "text",
+      "id": "form_title",
+      "label": "Form title (accessibility)",
+      "default": "Jobs"
+    },
+    {
+      "type": "number",
+      "id": "form_height",
+      "label": "Initial form height (px)",
+      "info": "Starting height before JotForm auto-resizes. Prevents layout jump.",
+      "default": 539
+    }
+  ],
+  "presets": [
+    {
+      "name": "HB Careers"
+    }
+  ]
+}
+{% endschema %}

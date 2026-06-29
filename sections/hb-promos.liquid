@@ -1,0 +1,164 @@
+{%- comment -%} sections/hb-promos.liquid — 2×2 promo card grid. Styled by hb-home.css {%- endcomment -%}
+<section class="promos">
+  <div class="container">
+    <div class="promos__grid">
+      {%- for block in section.blocks -%}
+        <article
+          class="promo{% if block.settings.featured_mobile %} promo--locations{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          <div class="promo__media">
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 1256
+                | image_tag:
+                  alt: block.settings.image.alt | default: block.settings.title,
+                  loading: 'lazy',
+                  widths: '375, 550, 750, 1100, 1256'
+              }}
+            {%- elsif block.settings.fallback_asset != blank -%}
+              <img
+                src="{{ block.settings.fallback_asset | asset_url }}"
+                alt="{{ block.settings.title | escape }}"
+                loading="lazy"
+                width="628"
+                height="301"
+              >
+            {%- endif -%}
+          </div>
+          <div class="promo__caption">
+            {%- if block.settings.title != blank -%}
+              <h3 class="promo__title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.button_label != blank -%}
+              {%- liquid
+                assign promo_href = block.settings.button_link
+                assign promo_label_key = block.settings.button_label | downcase | strip
+                assign promo_asset_key = block.settings.fallback_asset | downcase | strip
+                assign is_locations_promo = false
+
+                if promo_label_key contains 'location' or promo_asset_key contains 'promo-locations'
+                  assign is_locations_promo = true
+                endif
+
+                if is_locations_promo
+                  capture promo_href
+                    render 'hb-locations-url'
+                  endcapture
+                  assign promo_href = promo_href | strip
+                elsif promo_label_key == 'menu'
+                  if pages.menu != blank
+                    assign promo_href = pages.menu.url
+                  elsif promo_href == blank
+                    assign promo_href = '/pages/menu'
+                  endif
+                elsif promo_href == blank
+                  assign promo_href = '#'
+                endif
+              -%}
+              <a class="btn btn--card" href="{{ promo_href }}">
+                {{ block.settings.button_label }}
+              </a>
+            {%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HB Promos",
+  "tag": "section",
+  "class": "hb-promos-section",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "promo",
+      "name": "Promo card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "fallback_asset",
+          "label": "Fallback asset filename (if no image uploaded)",
+          "info": "e.g. hb-promo-menu.jpg"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Promo title"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Learn more"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "checkbox",
+          "id": "featured_mobile",
+          "label": "Show first on mobile",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HB Promos",
+      "blocks": [
+        {
+          "type": "promo",
+          "settings": {
+            "fallback_asset": "hb-promo-menu.jpg",
+            "title": "Classic fast food. Real ingredients.",
+            "button_label": "Menu",
+            "button_link": "/pages/menu"
+          }
+        },
+        {
+          "type": "promo",
+          "settings": {
+            "fallback_asset": "hb-promo-locations.jpg",
+            "title": "You're closer than you think.",
+            "button_label": "Find Location",
+            "button_link": "/pages/store-locator",
+            "featured_mobile": true
+          }
+        },
+        {
+          "type": "promo",
+          "settings": {
+            "fallback_asset": "hb-promo-careers.jpg",
+            "title": "Work at Hoodburger.",
+            "button_label": "Careers",
+            "button_link": "/pages/careers"
+          }
+        },
+        {
+          "type": "promo",
+          "settings": {
+            "fallback_asset": "hb-promo-catering.jpg",
+            "title": "Hoodburger at your function.",
+            "button_label": "Catering",
+            "button_link": "/pages/catering"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

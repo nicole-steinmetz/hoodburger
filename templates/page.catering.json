@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "catering": {
+      "type": "hb-catering",
+      "settings": {
+        "heading": "Catering",
+        "jotform_id": "261770601059051",
+        "form_title": "Catering Enquiry",
+        "form_height": 539,
+        "hero_alt": "Hoodburger catering spread"
+      }
+    }
+  },
+  "order": [
+    "catering"
+  ]
+}

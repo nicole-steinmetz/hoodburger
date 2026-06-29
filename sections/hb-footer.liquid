@@ -1,0 +1,195 @@
+{%- comment -%} sections/hb-footer.liquid — custom Hoodburger footer. Styled by hb-home.css {%- endcomment -%}
+{%- liquid
+  assign logo_url = section.settings.logo_link
+  if logo_url == blank
+    assign logo_url = routes.root_url
+  endif
+-%}
+<footer class="site-footer">
+  <div class="footer__top">
+    <div class="container footer__top-inner">
+    <div class="footer__brand">
+      <a class="footer__logo" href="{{ logo_url }}" aria-label="{{ shop.name }} home">
+      {%- if section.settings.logo != blank -%}
+        {{ section.settings.logo | image_url: width: 680 | image_tag: alt: shop.name, class: 'footer__logo-img', loading: 'lazy' }}
+      {%- else -%}
+        <img class="footer__logo-img" src="{{ 'hb-footer-logo.svg' | asset_url }}" alt="{{ shop.name }}" width="319" height="50" loading="lazy">
+      {%- endif -%}
+      </a>
+
+      <div class="footer__socials">
+        {%- if section.settings.instagram_url != blank -%}
+          <a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.tiktok_url != blank -%}
+          <a href="{{ section.settings.tiktok_url }}" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg>
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="footer__links">
+      {%- for block in section.blocks -%}
+        <div class="footer__col footer__col--{{ block.settings.column | default: 'links' }}" {{ block.shopify_attributes }}>
+          {%- if block.settings.heading != blank -%}
+            <p class="footer__heading">{{ block.settings.heading }}</p>
+          {%- endif -%}
+          <ul>
+            {%- for i in (1..6) -%}
+              {%- assign label_key = 'link_' | append: i | append: '_label' -%}
+              {%- assign url_key = 'link_' | append: i | append: '_url' -%}
+              {%- assign label = block.settings[label_key] -%}
+              {%- assign url = block.settings[url_key] -%}
+              {%- if label != blank -%}
+                {%- liquid
+                  assign footer_label_key = label | downcase | strip
+                  assign footer_url = url
+                  if footer_label_key contains 'store location' or footer_label_key contains 'locations' or footer_url == '/pages/locations'
+                    capture footer_url
+                      render 'hb-locations-url'
+                    endcapture
+                    assign footer_url = footer_url | strip
+                  elsif footer_label_key contains 'our story' or footer_url == '/pages/about'
+                    capture footer_url
+                      render 'hb-our-story-url'
+                    endcapture
+                    assign footer_url = footer_url | strip
+                  endif
+                -%}
+                <li><a href="{{ footer_url | default: '#' }}">{{ label }}</a></li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endfor -%}
+    </div>
+    </div>
+  </div>
+
+  <div class="footer__bar">
+    <div class="container footer__bar-inner">
+      <p class="footer__copy">
+        © <strong>HoodBurger</strong> Pty Ltd. All Rights Reserved.
+      </p>
+      <nav class="footer__legal" aria-label="Legal">
+        {%- assign privacy_url = section.settings.privacy_link | default: '/pages/privacy-policy' -%}
+        {%- assign terms_url = section.settings.terms_link | default: '/pages/terms-and-conditions' -%}
+        <a href="{{ privacy_url }}">Privacy Policy</a>
+        <a href="{{ terms_url }}">Terms &amp; Conditions</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "HB Footer",
+  "tag": "footer",
+  "class": "hb-footer-section",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Footer logo" },
+    { "type": "url", "id": "logo_link", "label": "Logo link (defaults to store home page)" },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "tiktok_url",
+      "label": "TikTok URL"
+    },
+    { "type": "url", "id": "privacy_link", "label": "Privacy policy link", "info": "Defaults to /pages/privacy-policy — create that page in Shopify admin and assign the Privacy Policy template." },
+    { "type": "url", "id": "terms_link", "label": "Terms & conditions link", "info": "Defaults to /pages/terms-and-conditions — create that page in Shopify admin and assign the Terms & Conditions template." }
+  ],
+  "blocks": [
+    {
+      "type": "link_column",
+      "name": "Link column",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Links" },
+        {
+          "type": "select",
+          "id": "column",
+          "label": "Column",
+          "options": [
+            { "value": "menu", "label": "Order & Menu" },
+            { "value": "brand", "label": "Our Brand" },
+            { "value": "support", "label": "Support" }
+          ],
+          "default": "menu"
+        },
+        { "type": "text", "id": "link_1_label", "label": "Link 1 label" },
+        { "type": "url", "id": "link_1_url", "label": "Link 1 URL" },
+        { "type": "text", "id": "link_2_label", "label": "Link 2 label" },
+        { "type": "url", "id": "link_2_url", "label": "Link 2 URL" },
+        { "type": "text", "id": "link_3_label", "label": "Link 3 label" },
+        { "type": "url", "id": "link_3_url", "label": "Link 3 URL" },
+        { "type": "text", "id": "link_4_label", "label": "Link 4 label" },
+        { "type": "url", "id": "link_4_url", "label": "Link 4 URL" },
+        { "type": "text", "id": "link_5_label", "label": "Link 5 label" },
+        { "type": "url", "id": "link_5_url", "label": "Link 5 URL" },
+        { "type": "text", "id": "link_6_label", "label": "Link 6 label" },
+        { "type": "url", "id": "link_6_url", "label": "Link 6 URL" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HB Footer",
+      "settings": {
+        "instagram_url": "https://www.instagram.com/itshoodburger?igsh=MW95ZjNjYTdtMWl3dw==",
+        "tiktok_url": "https://www.tiktok.com/@itshoodburger?_r=1&_t=ZS-97Vo8wTqUi1"
+      },
+      "blocks": [
+        {
+          "type": "link_column",
+          "settings": {
+            "heading": "Order & Menu",
+            "column": "menu",
+            "link_1_label": "Order Now",
+            "link_1_url": "/pages/order-now",
+            "link_2_label": "The Menu",
+            "link_2_url": "/pages/menu",
+            "link_3_label": "Catering",
+            "link_3_url": "/pages/catering",
+            "link_4_label": "Store Locations",
+            "link_4_url": "/pages/locations"
+          }
+        },
+        {
+          "type": "link_column",
+          "settings": {
+            "heading": "Our Brand",
+            "column": "brand",
+            "link_1_label": "Our Story",
+            "link_1_url": "/pages/about",
+            "link_2_label": "Rewards",
+            "link_2_url": "/pages/rewards",
+            "link_3_label": "Careers",
+            "link_3_url": "/pages/careers",
+            "link_4_label": "Sponsorships",
+            "link_4_url": "/pages/sponsorships"
+          }
+        },
+        {
+          "type": "link_column",
+          "settings": {
+            "heading": "Support",
+            "column": "support",
+            "link_1_label": "Contact",
+            "link_1_url": "/pages/contact",
+            "link_2_label": "FAQs",
+            "link_2_url": "/pages/faqs",
+            "link_3_label": "Home",
+            "link_3_url": "/"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

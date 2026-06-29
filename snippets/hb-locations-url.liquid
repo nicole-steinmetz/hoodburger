@@ -1,0 +1,11 @@
+{%- doc -%}
+  Outputs the Store Locations page URL.
+  Prefers the live Shopify page handle (store-locator or locations), with a safe fallback.
+{%- enddoc -%}
+{%- if pages['store-locator'] != blank -%}
+  {{- pages['store-locator'].url -}}
+{%- elsif pages.locations != blank -%}
+  {{- pages.locations.url -}}
+{%- else -%}
+  /pages/store-locator
+{%- endif -%}

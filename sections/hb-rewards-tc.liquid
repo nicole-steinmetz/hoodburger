@@ -1,0 +1,127 @@
+{%- comment -%}
+  sections/hb-rewards-tc.liquid
+  Terms & Conditions accordion for the Rewards page.
+  Styled by hb-rewards.css (loaded via hb-rewards-hero — do NOT add stylesheet_tag here).
+  JS: hb-rewards-tc.js (deferred). Toggles hidden + aria-expanded only. No content injected.
+  JSON-LD: FAQPage schema, auto-built from block content. Updates live as Luke fills in the items.
+  Figma refs: nodes 17:10868 (heading), 17:10869–17:10953 (accordion rows), 17:10879 (row marker icon).
+{%- endcomment -%}
+
+<script src="{{ 'hb-rewards-tc.js' | asset_url }}" defer></script>
+
+<section class="rewards-tc">
+  <div class="container">
+
+    {%- if section.settings.heading != blank -%}
+      <h2 class="rewards-tc__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <ul class="tc-list" role="list">
+      {%- for block in section.blocks -%}
+        {%- assign is_open = block.settings.default_open -%}
+        <li class="tc-item" {{ block.shopify_attributes }}>
+          <button
+            class="tc-item__toggle"
+            type="button"
+            aria-expanded="{{ is_open }}"
+            aria-controls="tc-body-{{ block.id }}"
+          >
+            <img
+              class="tc-item__marker"
+              src="{{ 'icon-circle-outline.svg' | asset_url }}"
+              alt=""
+              width="14"
+              height="14"
+              aria-hidden="true"
+              loading="lazy"
+            >
+            <span class="tc-item__label">{{ block.settings.label }}</span>
+            <span class="tc-item__icon" aria-hidden="true">+</span>
+          </button>
+          <div
+            id="tc-body-{{ block.id }}"
+            class="tc-item__body"
+            {% unless is_open %}hidden{% endunless %}
+          >
+            {%- if block.settings.content != blank -%}
+              {{ block.settings.content }}
+            {%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+  </div>
+</section>
+
+{%- comment -%} FAQPage JSON-LD — AI search citation (ChatGPT / Perplexity / Google AI Overviews). Builds progressively as Luke adds content. {%- endcomment -%}
+{%- assign faq_items = section.blocks | where: 'settings.content', '' -%}
+{%- capture faq_schema -%}
+  {%- for block in section.blocks -%}
+    {%- if block.settings.content != blank -%}
+      {
+        "@type": "Question",
+        "name": {{ block.settings.label | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ block.settings.content | strip_html | json }}
+        }
+      }{% unless forloop.last %},{% endunless %}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if faq_schema != blank -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{{ faq_schema }}]
+}
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "HB Rewards T&C",
+  "tag": "section",
+  "class": "hb-rewards-tc-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "Terms & Conditions"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Accordion item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Item label"
+        },
+        {
+          "type": "html",
+          "id": "content",
+          "label": "Item content",
+          "info": "Luke owns all T&C copy. HTML allowed for tables. Leave blank and fill in Shopify admin."
+        },
+        {
+          "type": "checkbox",
+          "id": "default_open",
+          "label": "Open by default",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HB Rewards T&C"
+    }
+  ]
+}
+{% endschema %}

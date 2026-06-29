@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "locations": {
+      "type": "hb-storepoint-page",
+      "settings": {
+        "heading": "Store Locations",
+        "hero_asset": "hb-locations-hero.jpg"
+      }
+    }
+  },
+  "order": [
+    "locations"
+  ]
+}

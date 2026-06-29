@@ -679,9 +679,6 @@ body:has(#MainContent[data-template="page.menu"]) {
   color: var(--c-black);
   padding-block: 48px 72px;
 }
-.contact-page__header {
-  text-align: center;
-}
 .contact-page__heading {
   font-family: var(--font-base);
   font-weight: 700;
@@ -690,33 +687,15 @@ body:has(#MainContent[data-template="page.menu"]) {
   color: var(--c-black);
   margin: 0 0 32px;
 }
-.contact-page__body {
-  font-size: var(--fs-p2);
-  line-height: 1.5;
-}
-.contact-page__body > h1:first-child {
-  display: none;
-}
-.contact-page__body p { margin: 0 0 1em; }
-.contact-page__body p:last-child { margin-bottom: 0; }
-.contact-page__body a {
-  color: inherit;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-.contact-page__form {
+.contact-page__embed {
   width: 100%;
   max-width: 100%;
-  margin-top: 32px;
 }
-.contact-page__body + .contact-page__form { margin-top: 0; }
 .contact-page__iframe {
   display: block;
   width: 100%;
   min-width: 100%;
   max-width: 100%;
-  min-height: var(--contact-iframe-min-height, 540px);
-  height: var(--contact-iframe-min-height, 540px);
   border: 0;
   background: transparent;
 }

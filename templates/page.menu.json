@@ -1,0 +1,29 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hb-page-hero",
+      "settings": {
+        "variant": "menu",
+        "fallback_asset": "hb-menu-hero.jpg"
+      }
+    },
+    "cta": {
+      "type": "hb-cta-bar",
+      "settings": {
+        "button_style": "order",
+        "headline": "Eat hamburgers, become a Wizard, get rewards.",
+        "order_label": "Order Now",
+        "order_link": "/pages/order-now"
+      }
+    },
+    "menu": {
+      "type": "hb-menu",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "cta",
+    "menu"
+  ]
+}

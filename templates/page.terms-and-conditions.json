@@ -1,0 +1,29 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hb-page-hero",
+      "settings": {
+        "fallback_asset": "hb-legal-hero-terms.jpg"
+      }
+    },
+    "cta": {
+      "type": "hb-cta-bar",
+      "settings": {
+        "headline": "Eat hamburgers, become a Wizard, get rewards.",
+        "rewards_label": "Rewards",
+        "rewards_link": "/pages/rewards",
+        "order_label": "Order Now",
+        "order_link": "/pages/order-now"
+      }
+    },
+    "content": {
+      "type": "hb-legal-content",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "cta",
+    "content"
+  ]
+}

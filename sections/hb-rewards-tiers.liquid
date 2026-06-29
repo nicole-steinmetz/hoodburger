@@ -1,0 +1,319 @@
+{%- comment -%}
+  sections/hb-rewards-tiers.liquid
+  Loyalty tier cards — Wastelander, Yellowstone Citizen, Wizard.
+  3 blocks of type "tier". Styled by hb-rewards.css (loaded via hb-rewards-hero).
+  Figma refs:
+    Wastelander  node 17:10749 / photo hb-hero-fries.jpg (Figma 17:10719) — green bg, photo-right
+    Citizen      node 17:10719 — yellow bg #FFD100, photo-left, text-right
+    Wizard       node 17:10733 — bronze bg #B79268, text-left, photo-right
+{%- endcomment -%}
+
+<div class="rewards-tiers">
+  {%- for block in section.blocks -%}
+    {%- assign tier_id   = block.settings.tier_id   | default: 'wastelander' -%}
+    {%- assign img_side  = block.settings.image_side | default: 'right' -%}
+    {%- assign fill_pct  = block.settings.progress_fill | default: 46 -%}
+    {%- assign icon_asset = block.settings.icon_asset -%}
+    {%- if icon_asset == blank -%}
+      {%- if tier_id == 'wastelander' -%}
+        {%- assign icon_asset = 'hoodburger 2.png' -%}
+        {%- assign icon_w = 63 -%}
+        {%- assign icon_h = 105 -%}
+      {%- else -%}
+        {%- assign icon_asset = 'HOODBURGER---BURGERS-1-Hot Cheeseburger 1.png' -%}
+        {%- assign icon_w = 121 -%}
+        {%- assign icon_h = 80 -%}
+      {%- endif -%}
+    {%- else -%}
+      {%- assign icon_w = 63 -%}
+      {%- assign icon_h = 105 -%}
+    {%- endif -%}
+
+    <div
+      class="rewards-tier rewards-tier--{{ tier_id }}{% if img_side == 'left' %} rewards-tier--photo-left{% endif %}"
+      {{ block.shopify_attributes }}
+    >
+      <div class="rewards-tier__inner">
+
+        {%- comment -%} ── Copy column ────────────────────────────────── {%- endcomment -%}
+        <div class="rewards-tier__copy">
+
+          <div class="tier-header">
+            {%- if block.settings.points_per_dollar != blank -%}
+              <div class="tier-badge" aria-label="{{ block.settings.points_per_dollar }}">
+                <span class="tier-badge__icon" aria-hidden="true">
+                  {{ 'Tick Icon.svg' | inline_asset_content }}
+                </span>
+                <span>{{ block.settings.points_per_dollar }}</span>
+              </div>
+            {%- endif -%}
+            <h2 class="tier-name">{{ block.settings.tier_name }}</h2>
+          </div>
+
+          {%- if block.settings.description != blank -%}
+            <p class="tier-description">{{ block.settings.description }}</p>
+          {%- endif -%}
+
+          {%- comment -%} Progress bar — decorative; not linked to live Marsello data {%- endcomment -%}
+          <div class="tier-progress" role="presentation">
+            <div class="tier-progress__rail">
+              <div class="tier-progress__track">
+                <div class="tier-progress__fill" style="width: {{ fill_pct }}%;"></div>
+              </div>
+              {%- if icon_asset != blank -%}
+                <img
+                  class="tier-progress__icon"
+                  src="{{ icon_asset | asset_url }}"
+                  alt=""
+                  width="{{ icon_w }}"
+                  height="{{ icon_h }}"
+                  loading="lazy"
+                >
+              {%- endif -%}
+            </div>
+            {%- if block.settings.milestone_a != blank -%}
+              <div class="tier-progress__milestones">
+                {%- if block.settings.milestone_start != blank -%}
+                  <span>{{ block.settings.milestone_start }}</span>
+                {%- endif -%}
+                <span>{{ block.settings.milestone_a }}</span>
+                <span>{{ block.settings.milestone_b }}</span>
+                <span>{{ block.settings.milestone_c }}</span>
+                <span>{{ block.settings.milestone_d }}</span>
+              </div>
+            {%- endif -%}
+          </div>
+
+          {%- if block.settings.reward_name != blank -%}
+            <h3 class="tier-reward__name">{{ block.settings.reward_name }}</h3>
+          {%- endif -%}
+
+          {%- if block.settings.reward_body != blank -%}
+            <div class="tier-reward__body">{{ block.settings.reward_body }}</div>
+          {%- endif -%}
+
+        </div>{%- comment -%} /.rewards-tier__copy {%- endcomment -%}
+
+        {%- comment -%} ── Media column ───────────────────────────────── {%- endcomment -%}
+        <div class="rewards-tier__media">
+          {%- if block.settings.image != blank -%}
+            {{
+              block.settings.image
+              | image_url: width: 1440
+              | image_tag:
+                loading: 'lazy',
+                alt: block.settings.tier_name,
+                widths: '500, 750, 1000, 1440',
+                sizes: '(min-width: 1024px) 50vw, 100vw'
+            }}
+          {%- elsif block.settings.fallback_asset != blank -%}
+            <img
+              src="{{ block.settings.fallback_asset | asset_url }}"
+              alt="{{ block.settings.tier_name }}"
+              width="720"
+              height="625"
+              loading="lazy"
+            >
+          {%- endif -%}
+        </div>
+
+      </div>{%- comment -%} /.rewards-tier__inner {%- endcomment -%}
+    </div>{%- comment -%} /.rewards-tier {%- endcomment -%}
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "HB Rewards Tiers",
+  "tag": "div",
+  "class": "hb-rewards-tiers-section",
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "tier",
+      "name": "Loyalty Tier",
+      "settings": [
+        {
+          "type": "select",
+          "id": "tier_id",
+          "label": "Tier (sets colour scheme)",
+          "options": [
+            { "value": "wastelander", "label": "Wastelander (green)" },
+            { "value": "citizen",     "label": "Yellowstone Citizen (yellow)" },
+            { "value": "wizard",      "label": "Wizard (bronze)" }
+          ],
+          "default": "wastelander"
+        },
+        {
+          "type": "text",
+          "id": "tier_name",
+          "label": "Tier name",
+          "default": "WASTELANDER"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "text",
+          "id": "points_per_dollar",
+          "label": "Points badge label",
+          "default": "7 Points Per Dollar"
+        },
+        {
+          "type": "text",
+          "id": "reward_name",
+          "label": "Reward title",
+          "default": "Win Free Large Fries"
+        },
+        {
+          "type": "richtext",
+          "id": "reward_body",
+          "label": "Reward details"
+        },
+        {
+          "type": "range",
+          "id": "progress_fill",
+          "label": "Progress bar fill (%)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 46,
+          "info": "Decorative only — not connected to live Marsello data."
+        },
+        {
+          "type": "header",
+          "content": "Progress bar milestone labels"
+        },
+        {
+          "type": "text",
+          "id": "milestone_start",
+          "label": "Milestone 0 (start)",
+          "default": "0"
+        },
+        {
+          "type": "text",
+          "id": "milestone_a",
+          "label": "Milestone 1",
+          "default": "225"
+        },
+        {
+          "type": "text",
+          "id": "milestone_b",
+          "label": "Milestone 2",
+          "default": "450"
+        },
+        {
+          "type": "text",
+          "id": "milestone_c",
+          "label": "Milestone 3",
+          "default": "675"
+        },
+        {
+          "type": "text",
+          "id": "milestone_d",
+          "label": "Milestone 4 (max)",
+          "default": "900"
+        },
+        {
+          "type": "header",
+          "content": "Progress bar reward icon"
+        },
+        {
+          "type": "text",
+          "id": "icon_asset",
+          "label": "Icon asset filename",
+          "info": "Sits on the end of the progress bar. Defaults: hoodburger 2.png (Wastelander), HOODBURGER---BURGERS-1-Hot Cheeseburger 1.png (Citizen/Wizard)."
+        },
+        {
+          "type": "header",
+          "content": "Photo"
+        },
+        {
+          "type": "select",
+          "id": "image_side",
+          "label": "Photo position (desktop)",
+          "options": [
+            { "value": "right", "label": "Right — text left (Wastelander / Wizard)" },
+            { "value": "left",  "label": "Left — text right (Yellowstone Citizen)" }
+          ],
+          "default": "right"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Tier photo"
+        },
+        {
+          "type": "text",
+          "id": "fallback_asset",
+          "label": "Fallback asset filename",
+          "info": "Theme asset filename, e.g. hb-hero-fries.jpg. Used until image_picker is set."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HB Rewards Tiers",
+      "blocks": [
+        {
+          "type": "tier",
+          "settings": {
+            "tier_id": "wastelander",
+            "tier_name": "WASTELANDER",
+            "description": "Beginner-level hamburger knowledge and a pocket full of napkins. Your journey begins here, mysterious traveller. We'll have this conversation again.",
+            "points_per_dollar": "7 Points Per Dollar",
+            "reward_name": "Win Free Large Fries",
+            "reward_body": "<p>At around $25 per visit, that's roughly 3–4 visits depending on what you order.</p>",
+            "progress_fill": 46,
+            "milestone_a": "225",
+            "milestone_b": "450",
+            "milestone_c": "675",
+            "milestone_d": "900",
+            "image_side": "right",
+            "fallback_asset": "hb-hero-fries.jpg"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "tier_id": "citizen",
+            "tier_name": "YELLOWSTONE CITIZEN",
+            "description": "The staff member glances like they recognise you from somewhere. Though your true identity remains unknown...for now. The path ahead is yours to choose.",
+            "points_per_dollar": "10 Points Per Dollar",
+            "reward_name": "Free Cheeseburger",
+            "reward_body": "<p>At $25 per visit, that's roughly 4 visits — twice as fast as NPC.</p><p>Also unlocks:</p><ul><li>Free Cheeseburger on your birthday</li><li>Christmas exclusive menu access before the general public</li></ul>",
+            "progress_fill": 47,
+            "milestone_a": "250",
+            "milestone_b": "500",
+            "milestone_c": "750",
+            "milestone_d": "1000",
+            "image_side": "left",
+            "fallback_asset": "hb-rewards-citizen.jpg"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "tier_id": "wizard",
+            "tier_name": "WIZARD",
+            "description": "Overpowered hero of Yellowstone Castle. Your eyes glow white whenever Hoodburger is mentioned and when it's all said and done, we'll hang your jersey in the rafters.",
+            "points_per_dollar": "12 Points Per Dollar",
+            "reward_name": "Free Cheeseburger",
+            "reward_body": "<p>At $25 per visit, that's roughly 3 visits.</p><p>Also unlocks:</p><ul><li>Free Cheeseburger when you reach Wizard</li></ul>",
+            "progress_fill": 46,
+            "milestone_a": "225",
+            "milestone_b": "450",
+            "milestone_c": "675",
+            "milestone_d": "900",
+            "image_side": "right",
+            "fallback_asset": "hb-rewards-wizard.jpg"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

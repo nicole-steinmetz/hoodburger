@@ -1,0 +1,230 @@
+{%- comment -%} sections/hb-menu.liquid {%- endcomment -%}
+<section class="menu" id="hb-menu-{{ section.id }}">
+  <nav class="menu-tabs" id="hb-tabs-{{ section.id }}" aria-label="Menu categories">
+    <div class="container menu-tabs__inner">
+      <div class="menu-tabs__nav">
+        <ul class="menu-tabs__list">
+          <li><a class="menu-tabs__link is-active" href="#menu-burgers">Burgers</a></li>
+          <li><a class="menu-tabs__link" href="#menu-sides">Sides and Sauces</a></li>
+          <li><a class="menu-tabs__link" href="#menu-drinks">Cold Drinks</a></li>
+        </ul>
+        <div class="menu-tabs__track" aria-hidden="true">
+          <span class="menu-tabs__indicator"></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container menu__inner">
+    <div class="menu__body">
+      {% render 'hb-menu-content' %}
+    </div>
+  </div>
+</section>
+
+<div class="menu-pill" id="hb-pill-{{ section.id }}" role="navigation" aria-label="Menu categories (floating)">
+  <button class="menu-pill__btn is-active" data-target="#menu-burgers">Burgers</button>
+  <button class="menu-pill__btn" data-target="#menu-sides">Sides</button>
+  <button class="menu-pill__btn" data-target="#menu-drinks">Drinks</button>
+</div>
+
+<script>
+  (() => {
+    const sectionId = '{{ section.id }}';
+    const root      = document.getElementById('hb-menu-' + sectionId);
+    const tabsEl    = document.getElementById('hb-tabs-' + sectionId);
+    const pill      = document.getElementById('hb-pill-' + sectionId);
+    if (!root || !tabsEl || !pill) return;
+
+    const tabLinks   = [...root.querySelectorAll('.menu-tabs__link')];
+    const pillBtns   = [...pill.querySelectorAll('.menu-pill__btn')];
+    const indicator  = root.querySelector('.menu-tabs__indicator');
+    const tabTrack   = root.querySelector('.menu-tabs__track');
+    const tabList    = root.querySelector('.menu-tabs__list');
+    const tabNav     = root.querySelector('.menu-tabs__nav');
+    const targets    = tabLinks.map(l => document.querySelector(l.getAttribute('href'))).filter(Boolean);
+
+    const INDICATOR_MS = 350;
+    let scrollSyncPaused = false;
+    let lastActiveIndex = 0;
+    let scrollSyncFrame = 0;
+
+    const headerH = () => document.querySelector('.site-header')?.offsetHeight || 0;
+
+    function updateIndicator(index, { animate = true } = {}) {
+      const li = tabLinks[index]?.closest('li');
+      if (!li || !tabTrack || !indicator) return;
+
+      if (!animate) {
+        indicator.style.transition = 'none';
+      } else {
+        indicator.style.transition = '';
+      }
+
+      const trackRect = tabTrack.getBoundingClientRect();
+      const liRect = li.getBoundingClientRect();
+      indicator.style.width = `${liRect.width}px`;
+      indicator.style.transform = `translateX(${liRect.left - trackRect.left}px)`;
+
+      if (!animate) {
+        void indicator.offsetWidth;
+        indicator.style.transition = '';
+      }
+    }
+
+    function setActiveStates(index) {
+      tabLinks.forEach((l, i) => l.classList.toggle('is-active', i === index));
+      pillBtns.forEach((b, i) => b.classList.toggle('is-active', i === index));
+    }
+
+    function scrollTabIntoView(index, smooth) {
+      if (!tabList || !window.matchMedia('(max-width: 767px)').matches) return;
+      tabLinks[index]?.closest('li')?.scrollIntoView({
+        behavior: smooth ? 'smooth' : 'auto',
+        inline: 'center',
+        block: 'nearest',
+      });
+    }
+
+    function setActive(index, { animate = false, syncTab = false } = {}) {
+      setActiveStates(index);
+      updateIndicator(index, { animate });
+      if (syncTab) scrollTabIntoView(index, animate);
+    }
+
+    function scrollToTarget(target) {
+      const scroller = document.scrollingElement || document.documentElement;
+      const top = target.getBoundingClientRect().top + window.scrollY - headerH() - 24;
+
+      // Mobile browsers can ignore window.scrollTo in some states; scroll the document element directly.
+      try {
+        scroller.scrollTo({ top, behavior: 'smooth' });
+      } catch (_) {
+        scroller.scrollTop = top;
+      }
+
+      // Fallback if smooth scrolling is ignored or blocked.
+      window.setTimeout(() => {
+        if (Math.abs(scroller.scrollTop - top) > 8) {
+          scroller.scrollTop = top;
+        }
+      }, 80);
+    }
+
+    function waitForIndicator() {
+      return new Promise((resolve) => {
+        if (!indicator) {
+          resolve();
+          return;
+        }
+        let settled = false;
+        const done = () => {
+          if (settled) return;
+          settled = true;
+          indicator.removeEventListener('transitionend', onEnd);
+          resolve();
+        };
+        const onEnd = (event) => {
+          if (event.target === indicator && (event.propertyName === 'transform' || event.propertyName === 'width')) {
+            done();
+          }
+        };
+        indicator.addEventListener('transitionend', onEnd);
+        window.setTimeout(done, INDICATOR_MS + 50);
+      });
+    }
+
+    async function navigateTo(index) {
+      if (index < 0 || !targets[index]) return;
+
+      scrollSyncPaused = true;
+      lastActiveIndex = index;
+      setActiveStates(index);
+      updateIndicator(index, { animate: true });
+      scrollTabIntoView(index, true);
+
+      await waitForIndicator();
+      scrollToTarget(targets[index]);
+
+      window.setTimeout(() => {
+        scrollSyncPaused = false;
+      }, 450);
+    }
+
+    function syncFromScroll() {
+      if (scrollSyncPaused) return;
+      if (scrollSyncFrame) return;
+      scrollSyncFrame = window.requestAnimationFrame(() => {
+        scrollSyncFrame = 0;
+        const offset = headerH() + 80;
+        let active = 0;
+        targets.forEach((t, i) => {
+          if (t.getBoundingClientRect().top - offset <= 0) active = i;
+        });
+        if (active === lastActiveIndex) return;
+        lastActiveIndex = active;
+        setActiveStates(active);
+        updateIndicator(active, { animate: false });
+      });
+    }
+
+    tabLinks.forEach((link, i) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        navigateTo(i);
+      });
+    });
+
+    pillBtns.forEach((btn, i) => {
+      btn.addEventListener('click', () => navigateTo(i));
+    });
+
+    const observer = new IntersectionObserver(([entry]) => {
+      pill.classList.toggle('is-visible', !entry.isIntersecting);
+    }, { threshold: 0, rootMargin: '-60px 0px 0px 0px' });
+    observer.observe(tabsEl);
+
+    function positionPill() {
+      const mobile = window.matchMedia('(max-width: 767px)').matches;
+      let bottom = mobile ? 80 : 28;
+      const orderBar = document.querySelector('.cta-bar__order, .nav__cta-mobile');
+      if (mobile && orderBar) {
+        const rect = orderBar.getBoundingClientRect();
+        const fixedAtBottom = rect.bottom > window.innerHeight - 120 && rect.top > window.innerHeight * 0.5;
+        if (fixedAtBottom) {
+          bottom = Math.max(bottom, window.innerHeight - rect.top + 16);
+        }
+      }
+      pill.style.bottom = `${bottom}px`;
+    }
+
+    setActive(0, { animate: false });
+    positionPill();
+    window.addEventListener('scroll', syncFromScroll, { passive: true });
+    window.addEventListener('resize', () => {
+      positionPill();
+      const active = tabLinks.findIndex(l => l.classList.contains('is-active'));
+      updateIndicator(active >= 0 ? active : 0, { animate: false });
+    });
+    tabNav?.addEventListener('scroll', () => {
+      const active = tabLinks.findIndex(l => l.classList.contains('is-active'));
+      updateIndicator(active >= 0 ? active : 0, { animate: false });
+    }, { passive: true });
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(() => {
+        const active = tabLinks.findIndex(l => l.classList.contains('is-active'));
+        updateIndicator(active >= 0 ? active : 0, { animate: false });
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "HB Menu",
+  "tag": "section",
+  "class": "hb-menu-section",
+  "settings": [],
+  "presets": [{ "name": "HB Menu" }]
+}
+{% endschema %}

@@ -1,0 +1,68 @@
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "hb-footer",
+      "settings": {
+        "instagram_url": "https://www.instagram.com/itshoodburger?igsh=MW95ZjNjYTdtMWl3dw==",
+        "tiktok_url": "https://www.tiktok.com/@itshoodburger?_r=1&_t=ZS-97Vo8wTqUi1",
+        "privacy_link": "/pages/privacy-policy",
+        "terms_link": "/pages/terms-and-conditions"
+      },
+      "blocks": {
+        "col_menu": {
+          "type": "link_column",
+          "settings": {
+            "heading": "Order & Menu",
+            "column": "menu",
+            "link_1_label": "Order Now",
+            "link_1_url": "/pages/order-now",
+            "link_2_label": "The Menu",
+            "link_2_url": "/pages/menu",
+            "link_3_label": "Catering",
+            "link_3_url": "/pages/catering",
+            "link_4_label": "Store Locations",
+            "link_4_url": ""
+          }
+        },
+        "col_brand": {
+          "type": "link_column",
+          "settings": {
+            "heading": "Our Brand",
+            "column": "brand",
+            "link_1_label": "Our Story",
+            "link_1_url": "/pages/about",
+            "link_2_label": "Rewards",
+            "link_2_url": "/pages/rewards",
+            "link_3_label": "Careers",
+            "link_3_url": "/pages/careers",
+            "link_4_label": "Sponsorships",
+            "link_4_url": "/pages/sponsorships"
+          }
+        },
+        "col_support": {
+          "type": "link_column",
+          "settings": {
+            "heading": "Support",
+            "column": "support",
+            "link_1_label": "Contact",
+            "link_1_url": "/pages/contact",
+            "link_2_label": "FAQs",
+            "link_2_url": "/pages/faqs",
+            "link_3_label": "Home",
+            "link_3_url": "/"
+          }
+        }
+      },
+      "block_order": [
+        "col_menu",
+        "col_brand",
+        "col_support"
+      ]
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

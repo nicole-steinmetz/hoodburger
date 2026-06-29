@@ -1,0 +1,89 @@
+{%- comment -%} sections/hb-legal-content.liquid — legal body from page.content (CSS columns) + optional overrides. Styled by hb-home.css {%- endcomment -%}
+{%- liquid
+  assign col_left = section.settings.column_left
+  assign col_right = section.settings.column_right
+  assign use_column_override = false
+  if col_left != blank or col_right != blank
+    assign use_column_override = true
+  endif
+-%}
+
+<section class="legal">
+  <div class="container legal__inner">
+    {%- if section.settings.last_updated != blank -%}
+      <p class="legal__updated">{{ section.settings.last_updated }}</p>
+    {%- endif -%}
+
+    {%- if use_column_override -%}
+      <div class="legal__grid{% if col_right == blank %} legal__grid--single{% endif %}">
+        {%- if col_left != blank -%}
+          <div class="legal__col rte">{{ col_left }}</div>
+        {%- endif -%}
+        {%- if col_right != blank -%}
+          <div class="legal__col rte">{{ col_right }}</div>
+        {%- endif -%}
+      </div>
+    {%- elsif page.content != blank -%}
+      <div class="legal__body rte">{{ page.content }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.show_contact and section.settings.contact_body != blank -%}
+      <div class="legal__contact">
+        {%- if section.settings.contact_heading != blank -%}
+          <p class="legal__contact-title">{{ section.settings.contact_heading }}</p>
+        {%- endif -%}
+        <div class="legal__contact-body rte">{{ section.settings.contact_body }}</div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HB Legal Content",
+  "tag": "section",
+  "class": "hb-legal-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Legal copy is edited in Online Store → Pages (page body). It renders in two columns on desktop. Use the fields below only to override that layout."
+    },
+    {
+      "type": "text",
+      "id": "last_updated",
+      "label": "Last updated line (optional)"
+    },
+    {
+      "type": "richtext",
+      "id": "column_left",
+      "label": "Left column override (optional)"
+    },
+    {
+      "type": "richtext",
+      "id": "column_right",
+      "label": "Right column override (optional)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_contact",
+      "label": "Show contact block",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "contact_heading",
+      "label": "Contact heading"
+    },
+    {
+      "type": "richtext",
+      "id": "contact_body",
+      "label": "Contact text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "HB Legal Content"
+    }
+  ]
+}
+{% endschema %}

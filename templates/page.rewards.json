@@ -1,0 +1,191 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "rewards-hero": {
+      "type": "hb-rewards-hero",
+      "settings": {
+        "fallback_asset": "hb-rewards-hero.jpg",
+        "mobile_cta_label": "ORDER NOW",
+        "mobile_cta_link": "/pages/order-now"
+      }
+    },
+    "rewards-cta": {
+      "type": "hb-cta-bar",
+      "settings": {
+        "button_style": "order",
+        "headline": "Eat hamburgers, become a Wizard, get rewards.",
+        "rewards_label": "ORDER NOW",
+        "rewards_link": "/pages/order-now",
+        "order_label": "ORDER NOW",
+        "order_link": "/pages/order-now"
+      }
+    },
+    "rewards-tiers": {
+      "type": "hb-rewards-tiers",
+      "blocks": {
+        "wastelander": {
+          "type": "tier",
+          "settings": {
+            "tier_id": "wastelander",
+            "tier_name": "WASTELANDER",
+            "description": "Beginner-level hamburger knowledge and a pocket full of napkins. Your journey begins here, mysterious traveller. We'll have this conversation again.",
+            "points_per_dollar": "7 Points Per Dollar",
+            "reward_name": "Win Free Large Fries",
+            "reward_body": "<p>At around $25 per visit, that's roughly 3–4 visits depending on what you order.</p>",
+            "progress_fill": 46,
+            "milestone_a": "225",
+            "milestone_b": "450",
+            "milestone_c": "675",
+            "milestone_d": "900",
+            "image_side": "right",
+            "fallback_asset": "hb-hero-fries.jpg"
+          }
+        },
+        "citizen": {
+          "type": "tier",
+          "settings": {
+            "tier_id": "citizen",
+            "tier_name": "YELLOWSTONE CITIZEN",
+            "description": "The staff member glances like they recognise you from somewhere. Though your true identity remains unknown...for now. The path ahead is yours to choose.",
+            "points_per_dollar": "10 Points Per Dollar",
+            "reward_name": "Free Cheeseburger",
+            "reward_body": "<p>At $25 per visit, that's roughly 4 visits — twice as fast as NPC.</p><p>Also unlocks:</p><ul><li>Free Cheeseburger on your birthday</li><li>Christmas exclusive menu access before the general public</li></ul>",
+            "progress_fill": 47,
+            "milestone_a": "250",
+            "milestone_b": "500",
+            "milestone_c": "750",
+            "milestone_d": "1000",
+            "image_side": "left",
+            "fallback_asset": "hb-rewards-citizen.jpg"
+          }
+        },
+        "wizard": {
+          "type": "tier",
+          "settings": {
+            "tier_id": "wizard",
+            "tier_name": "WIZARD",
+            "description": "Overpowered hero of Yellowstone Castle. Your eyes glow white whenever Hoodburger is mentioned and when it's all said and done, we'll hang your jersey in the rafters.",
+            "points_per_dollar": "12 Points Per Dollar",
+            "reward_name": "Free Cheeseburger",
+            "reward_body": "<p>At $25 per visit, that's roughly 3 visits.</p><p>Also unlocks:</p><ul><li>Free Cheeseburger when you reach Wizard</li></ul>",
+            "progress_fill": 46,
+            "milestone_a": "225",
+            "milestone_b": "450",
+            "milestone_c": "675",
+            "milestone_d": "900",
+            "image_side": "right",
+            "fallback_asset": "hb-rewards-wizard.jpg"
+          }
+        }
+      },
+      "block_order": ["wastelander", "citizen", "wizard"],
+      "settings": {}
+    },
+    "rewards-tc": {
+      "type": "hb-rewards-tc",
+      "blocks": {
+        "tc-membership": {
+          "type": "item",
+          "settings": {
+            "label": "Membership",
+            "content": "<ul><li>Open to individuals aged 16 and over residing in Australia.</li><li>One account per person. Membership is personal and non-transferable.</li><li>Hoodburger reserves the right to suspend any account found to be misusing the programme.</li></ul>",
+            "default_open": true
+          }
+        },
+        "tc-earning": {
+          "type": "item",
+          "settings": {
+            "label": "Earning points",
+            "content": "<p>Points are earned on eligible in-store purchases. Earn rates vary by tier:</p><ul><li>NPC: 5 pts per $1 (coming 2027)</li><li>Wastelander: 7 pts per $1</li><li>Yellowstone Citizen: 10 pts per $1</li><li>Wizard: 12 pts per $1</li></ul><p>Points cannot be earned on third-party delivery orders.</p>",
+            "default_open": false
+          }
+        },
+        "tc-tier": {
+          "type": "item",
+          "settings": {
+            "label": "Tier status",
+            "content": "<p>Tier is based on cumulative points earned within a programme year and is not reduced by reward redemptions. Tier status is reassessed annually on 1 January and held through the following year.</p><table class=\"tc-tier-table\"><thead><tr><th scope=\"col\">Tier</th><th scope=\"col\">Entry threshold</th></tr></thead><tbody><tr><td>NPC</td><td>0 pts</td></tr><tr><td>Wastelander</td><td>1,500 pts</td></tr><tr><td>Yellowstone Citizen</td><td>5,000 pts</td></tr><tr><td>Wizard</td><td>9,000 pts</td></tr></tbody></table>",
+            "default_open": false
+          }
+        },
+        "tc-expiry": {
+          "type": "item",
+          "settings": {
+            "label": "Points expiry",
+            "content": "<p>Points expire after 6 months of inactivity. Any qualifying in-store purchase or reward redemption resets the expiry window.</p>",
+            "default_open": false
+          }
+        },
+        "tc-rewards": {
+          "type": "item",
+          "settings": {
+            "label": "Rewards",
+            "content": "<p>Rewards are redeemable in-store only with a minimum $10 spend. Rewards cannot be used on Bopple or DoorDash, have no cash value, and cannot be transferred.</p>",
+            "default_open": false
+          }
+        },
+        "tc-second-visit": {
+          "type": "item",
+          "settings": {
+            "label": "Second visit offer",
+            "content": "<p>New members receive a free Small Fries on their second visit. Valid for 14 days from sign-up. Minimum $15 spend. One per member.</p>",
+            "default_open": false
+          }
+        },
+        "tc-birthday": {
+          "type": "item",
+          "settings": {
+            "label": "Birthday reward",
+            "content": "<p>Wastelander, Yellowstone Citizen, and Wizard tier members receive a free Cheeseburger during their birthday month. Valid for 30 days. Minimum $10 spend. Requires at least 1 month of membership. Date of birth is locked once entered.</p>",
+            "default_open": false
+          }
+        },
+        "tc-xmas": {
+          "type": "item",
+          "settings": {
+            "label": "Wizard Christmas gift",
+            "content": "<p>Wizard tier members receive a complimentary gift in December, collected in-venue. The gift has no points value and cannot be redeemed online.</p>",
+            "default_open": false
+          }
+        },
+        "tc-changes": {
+          "type": "item",
+          "settings": {
+            "label": "Programme changes",
+            "content": "<p>Hoodburger may modify The Round Table's terms, earn rates, and rewards with reasonable notice. Continued participation after changes take effect constitutes acceptance of the updated terms.</p>",
+            "default_open": false
+          }
+        },
+        "tc-privacy": {
+          "type": "item",
+          "settings": {
+            "label": "Privacy",
+            "content": "<p>Personal information collected through The Round Table is handled in accordance with Hoodburger's <a href=\"/pages/privacy-policy\">Privacy Policy</a>, including name, email, date of birth, and transaction history.</p>",
+            "default_open": false
+          }
+        }
+      },
+      "block_order": [
+        "tc-membership", "tc-earning", "tc-tier", "tc-expiry", "tc-rewards",
+        "tc-second-visit", "tc-birthday", "tc-xmas", "tc-changes", "tc-privacy"
+      ],
+      "settings": {
+        "heading": "Terms & Conditions"
+      }
+    }
+  },
+  "order": [
+    "rewards-hero",
+    "rewards-cta",
+    "rewards-tiers",
+    "rewards-tc"
+  ]
+}

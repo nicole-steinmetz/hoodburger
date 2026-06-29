@@ -1,0 +1,61 @@
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "header": {
+      "type": "hb-header",
+      "settings": {
+        "menu": "main-menu",
+        "cta_label": "Order Now",
+        "cta_link": "/pages/order-now"
+      },
+      "blocks": {
+        "nav_menu": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Menu",
+            "link": "/pages/menu"
+          }
+        },
+        "nav_locations": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Locations",
+            "link": ""
+          }
+        },
+        "nav_about": {
+          "type": "nav_link",
+          "settings": {
+            "label": "About",
+            "link": "/pages/about"
+          }
+        },
+        "nav_rewards": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Rewards",
+            "link": "/pages/rewards"
+          }
+        },
+        "nav_catering": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Catering",
+            "link": "/pages/catering"
+          }
+        }
+      },
+      "block_order": [
+        "nav_menu",
+        "nav_locations",
+        "nav_about",
+        "nav_rewards",
+        "nav_catering"
+      ]
+    }
+  },
+  "order": [
+    "header"
+  ]
+}

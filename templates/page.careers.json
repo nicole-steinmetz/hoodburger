@@ -1,0 +1,33 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "hb-page-hero",
+      "settings": {
+        "variant": "default",
+        "fallback_asset": "hb-careers-hero.jpg"
+      }
+    },
+    "body": {
+      "type": "hb-careers",
+      "settings": {
+        "heading": "Careers",
+        "jotform_id": "261770384764062",
+        "form_title": "Jobs",
+        "form_height": 539
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "body"
+  ]
+}

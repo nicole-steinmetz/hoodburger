@@ -1,0 +1,310 @@
+{
+  "sections": {
+    "faq-hero": {
+      "type": "hb-page-hero",
+      "settings": {
+        "variant": "default",
+        "fallback_asset": "hb-faq-hero.jpg"
+      }
+    },
+    "faq-cta": {
+      "type": "hb-cta-bar",
+      "settings": {
+        "button_style": "order",
+        "headline": "Eat hamburgers, become a Wizard, get rewards.",
+        "rewards_label": "ORDER NOW",
+        "rewards_link": "/pages/order-now",
+        "order_label": "ORDER NOW",
+        "order_link": "/pages/order-now"
+      }
+    },
+    "faq-main": {
+      "type": "hb-faq",
+      "blocks": {
+        "cat-menu": {
+          "type": "category",
+          "settings": {
+            "label": "Menu & Dietary Information",
+            "anchor": "menu-dietary-information"
+          }
+        },
+        "q-allergy": {
+          "type": "item",
+          "settings": {
+            "label": "I have an allergy. What can I eat at Hoodburger?",
+            "content": "<p>Please note that due to the size of our kitchens, cross contamination is always possible. For severe allergies or anaphylaxis, we do not recommend taking any risks. For less severe allergies, our staff can help guide you through suitable alternatives.</p><ul><li><strong>Gluten:</strong> We offer a GF bun alternative and our fries are cooked in a separate fryer from the chicken. We recommend a beef or pork burger with fries and burger sauce.</li><li><strong>Soy:</strong> Soy is present in our American cheese and breadcrumb products. We recommend a beef or pork burger with Swiss cheese, fries, and ranch. Avoid the queso and battered products.</li><li><strong>Egg:</strong> Egg is present throughout much of our menu, including buns and chicken tenders. We recommend a beef or pork burger on a GF bun with fries and a non-mayonnaise sauce like ketchup or honey mustard.</li><li><strong>Dairy:</strong> Dairy is present in our buns, tenders, mash, and cheese products. We recommend a beef or pork burger with a GF bun and vegan cheese, fries, and a non-dairy sauce.</li><li><strong>Peanuts / Tree Nuts:</strong> We do not use nut-containing products, and staff are not permitted to bring nuts into the workplace.</li><li><strong>Lupin / Seafood:</strong> We do not use products containing lupin, fish, shellfish, or molluscs.</li><li><strong>Sesame:</strong> Sesame is present in our kitchens due to the introduction of sesame seed buns. While our standard buns do not contain sesame, cross-contamination is possible across preparation surfaces and equipment. Please inform our staff of any sesame allergies before ordering.</li></ul>",
+            "default_open": false
+          }
+        },
+        "q-veg": {
+          "type": "item",
+          "settings": {
+            "label": "Do you have vegetarian options?",
+            "content": "<p>Yes. Any burger or sandwich protein can be substituted with our fried field mushroom alternative.</p>",
+            "default_open": false
+          }
+        },
+        "q-vegan": {
+          "type": "item",
+          "settings": {
+            "label": "Do you have vegan options?",
+            "content": "<p>Not completely. Due to the size and setup of our kitchens, we cannot guarantee 100% vegan-safe preparation or prevent cross-contamination with non-vegan products. However, we do have a vegan-friendly, gluten-free bun and vegan cheese. We can remove the batter from the field mushroom alternative, substitute vegan cheese, and use the vegan GF bun. It's a limited build, but it's a good one!</p>",
+            "default_open": false
+          }
+        },
+        "q-binders": {
+          "type": "item",
+          "settings": {
+            "label": "Are there any binders or additives in the meat patties?",
+            "content": "<p>No. Our beef and pork patties are made using 100% West Australian meat with no binders or unnecessary additives—just seasoning. Our mince is prepared by Princi Butchers using beef from Gin Gin and Linley Valley free-range pork.</p>",
+            "default_open": false
+          }
+        },
+        "q-halal": {
+          "type": "item",
+          "settings": {
+            "label": "Is your meat halal?",
+            "content": "<p>Our chicken is halal and cooked separately from the beef, however our beef is not halal. Please let our staff know when ordering and we will take extra care to avoid cross-contamination during preparation.</p>",
+            "default_open": false
+          }
+        },
+        "q-mayo": {
+          "type": "item",
+          "settings": {
+            "label": "Is the mayonnaise pasteurised?",
+            "content": "<p>Yes. We only use pasteurised free-range whole egg mayonnaise across our menu, including our in-house mayonnaise-based sauces.</p>",
+            "default_open": false
+          }
+        },
+        "q-fullmenu": {
+          "type": "item",
+          "settings": {
+            "label": "Where can I view your full menu and order online?",
+            "content": "<p>Our full menu lives on our <a href=\"/pages/menu\">Menu page</a>—cheeseburgers, double cheeseburgers, chicken tender sandwiches, the Honey Butter Sandwich, hot tenders, fries, mashed potato, milkshakes, the lot. For pickup, order at <a href=\"https://hoodburger.bopple.app\" target=\"_blank\" rel=\"noopener\">hoodburger.bopple.app</a>. For delivery, head to our <a href=\"/pages/order-now\">Order Now page</a>.</p>",
+            "default_open": false
+          }
+        },
+        "cat-ordering": {
+          "type": "category",
+          "settings": {
+            "label": "Ordering, Locations & Hours",
+            "anchor": "ordering-locations-hours"
+          }
+        },
+        "q-pickup": {
+          "type": "item",
+          "settings": {
+            "label": "Do you offer pickup and delivery?",
+            "content": "<p>Yes, both. Pickup orders go through <a href=\"https://hoodburger.bopple.app\" target=\"_blank\" rel=\"noopener\">hoodburger.bopple.app</a> and can be collected from any of our five stores. For delivery, head to our <a href=\"/pages/order-now\">Order Now page</a>—the delivery range depends on which store you're closest to.</p>",
+            "default_open": false
+          }
+        },
+        "q-stores": {
+          "type": "item",
+          "settings": {
+            "label": "Where are Hoodburger's store locations?",
+            "content": "<p>For directions, addresses, and specific store details, check our <a href=\"/pages/locations\">Locations page</a>.</p>",
+            "default_open": false
+          }
+        },
+        "q-hours": {
+          "type": "item",
+          "settings": {
+            "label": "What are Hoodburger's opening hours?",
+            "content": "<p>Hours vary slightly by store. Most open daily from 11am to 9pm, with some staying open until 10pm on Fridays and Saturdays. Up-to-date hours, including public holidays, live on our <a href=\"/pages/locations\">Locations page</a> and each store's Google listing.</p>",
+            "default_open": false
+          }
+        },
+        "q-booze": {
+          "type": "item",
+          "settings": {
+            "label": "Do you sell beer or wine?",
+            "content": "<p>Some of our stores are licensed and some are BYO. Check our <a href=\"/pages/locations\">Locations page</a> for the liquor licence and BYO status of your nearest Hoodburger.</p>",
+            "default_open": false
+          }
+        },
+        "q-reso": {
+          "type": "item",
+          "settings": {
+            "label": "Do you take reservations?",
+            "content": "<p>No, we're walk-in only. Tables turn over pretty quickly so even on busy nights you'll usually find a seat.</p>",
+            "default_open": false
+          }
+        },
+        "q-waittime": {
+          "type": "item",
+          "settings": {
+            "label": "How long does it take to get my burger?",
+            "content": "<p>Most orders come out within 10 to 15 minutes during normal service. Peak times—Friday and Saturday nights especially—can run a bit longer, so order ahead online if you're in a rush.</p>",
+            "default_open": false
+          }
+        },
+        "q-family": {
+          "type": "item",
+          "settings": {
+            "label": "Is Hoodburger family friendly?",
+            "content": "<p>We are a family restaurant! We've got high chairs, kids' meals, and colouring sheets at the table. Some of our stores even have a wall covered in kids' drawings to prove it.</p>",
+            "default_open": false
+          }
+        },
+        "cat-rewards": {
+          "type": "category",
+          "settings": {
+            "label": "Rewards & Gift Cards",
+            "anchor": "rewards-gift-cards"
+          }
+        },
+        "q-loyalty": {
+          "type": "item",
+          "settings": {
+            "label": "What is your loyalty program?",
+            "content": "<p>Our loyalty program is called The Round Table. The more you eat, the more you rank up! Currently, all founding members skip the training ground and start directly at Wastelander. From there, you can journey upward to Yellowstone Citizen and eventually reach your final form as a Wizard.</p><p>📢 Note for Adventurers: In 2027, we will be officially launching the NPC tier, which will become the new entry-level baseline for the program. At that time, Wastelander will shift to become our second tier.</p><p>Every dollar you spend earns points toward free rewards. Higher tiers lock in permanently higher point values per dollar spent:</p><ul><li>Wastelander (Current Base Level): Earns 7 points per $1 spent.</li><li>Yellowstone Citizen (5,000 pts entry): Earns 10 points per $1 spent.</li><li>Wizard (9,000 pts entry): Earns 12 points per $1 spent.</li></ul><p>Points unlock incredible rewards along the way, like free regular fries, tenders, and cheeseburgers. Sign up at <a href=\"https://hoodburger.marsello.app\" target=\"_blank\" rel=\"noopener\">hoodburger.marsello.app</a> to activate your portal, add your digital card to your phone's wallet, and tap it at the counter when you order!</p><p>(Please note there is a $10 minimum spend at the till to redeem any reward item.)</p>",
+            "default_open": false
+          }
+        },
+        "q-giftcard": {
+          "type": "item",
+          "settings": {
+            "label": "How do I use a Hoodburger gift card?",
+            "content": "<p>Hand it over at the counter when you order and the balance gets applied to your purchase. You can use it at any Hoodburger location, and whatever balance is left stays on the card for next time. Note: Gift cards don't work on Bopple or DoorDash orders yet.</p>",
+            "default_open": false
+          }
+        },
+        "cat-catering": {
+          "type": "category",
+          "settings": {
+            "label": "Catering & Community",
+            "anchor": "catering-community"
+          }
+        },
+        "q-catering": {
+          "type": "item",
+          "settings": {
+            "label": "Is catering available?",
+            "content": "<p>Yes. We cater office lunches, parties, events, footy clubs, birthdays, whatever you've got going on. Fill in the <a href=\"/pages/catering\">catering form</a> on our website, select your store, and someone will be in touch within 24 hours to confirm the details.</p>",
+            "default_open": false
+          }
+        },
+        "q-cateringnotice": {
+          "type": "item",
+          "settings": {
+            "label": "How much notice do you need for catering orders?",
+            "content": "<p>We require 24 hours notice for standard catering. For anything feeding 30 or more people, please give us 72 hours so we can prep properly. Last-minute event? It is sometimes doable—just call your local store directly to ask.</p>",
+            "default_open": false
+          }
+        },
+        "q-recycle": {
+          "type": "item",
+          "settings": {
+            "label": "Do you recycle?",
+            "content": "<p>Yes. All our stores recycle paper and cardboard, bottles and cans go through the Container for Change program, and all of our packaging is fully biodegradable.</p>",
+            "default_open": false
+          }
+        },
+        "cat-careers": {
+          "type": "category",
+          "settings": {
+            "label": "Careers & Business",
+            "anchor": "careers-business"
+          }
+        },
+        "q-jobs": {
+          "type": "item",
+          "settings": {
+            "label": "How do I apply for a job at Hoodburger?",
+            "content": "<p>Head to the <a href=\"/pages/careers\">Careers page</a> on our website, fill in the form, select the store you're keen on, and upload your resume. It goes straight to that store's hiring team. We hire across the kitchen, front of house, and management.</p>",
+            "default_open": false
+          }
+        },
+        "q-franchise": {
+          "type": "item",
+          "settings": {
+            "label": "How do I find out about opening a Hoodburger?",
+            "content": "<p>Keen to run your own store? Get in touch through our <a href=\"/pages/contact\">contact form</a> and we'll send you the details.</p>",
+            "default_open": false
+          }
+        },
+        "q-supplier": {
+          "type": "item",
+          "settings": {
+            "label": "How do I become a Hoodburger supplier?",
+            "content": "<p>Thanks for your interest! We're not currently looking for new suppliers, but you're welcome to reach out via the <a href=\"/pages/contact\">contact form</a> on our website and we'll keep your details on file.</p>",
+            "default_open": false
+          }
+        },
+        "cat-support": {
+          "type": "category",
+          "settings": {
+            "label": "Support & Security",
+            "anchor": "support-security"
+          }
+        },
+        "q-complaint": {
+          "type": "item",
+          "settings": {
+            "label": "How do I get in contact about an issue with an order?",
+            "content": "<p>Use the <a href=\"/pages/contact\">contact form</a> on our website. Select your store, describe the issue, and hit send—it goes straight to that store's management team to sort out. We aim to have someone get back to you within 48 hours.</p>",
+            "default_open": false
+          }
+        },
+        "q-suggestion": {
+          "type": "item",
+          "settings": {
+            "label": "I've got a suggestion for a new product or menu item.",
+            "content": "<p>We love hearing from fans. Use the <a href=\"/pages/contact\">contact form</a> on our website and we'll pass it on to our food team. We can't promise it will make it to the menu, but we do read every single one!</p>",
+            "default_open": false
+          }
+        },
+        "q-scam": {
+          "type": "item",
+          "settings": {
+            "label": "Do you ever ask for bank or credit card details via email or online surveys?",
+            "content": "<p>Never. If you receive any communication claiming to be from Hoodburger that asks for financial or credit card details, it is a scam. Please do not engage with it or click any links.</p>",
+            "default_open": false
+          }
+        }
+      },
+      "block_order": [
+        "cat-menu",
+        "q-allergy",
+        "q-veg",
+        "q-vegan",
+        "q-binders",
+        "q-halal",
+        "q-mayo",
+        "q-fullmenu",
+        "cat-ordering",
+        "q-pickup",
+        "q-stores",
+        "q-hours",
+        "q-booze",
+        "q-reso",
+        "q-waittime",
+        "q-family",
+        "cat-rewards",
+        "q-loyalty",
+        "q-giftcard",
+        "cat-catering",
+        "q-catering",
+        "q-cateringnotice",
+        "q-recycle",
+        "cat-careers",
+        "q-jobs",
+        "q-franchise",
+        "q-supplier",
+        "cat-support",
+        "q-complaint",
+        "q-suggestion",
+        "q-scam"
+      ],
+      "settings": {
+        "page_title": "Frequently asked questions"
+      }
+    }
+  },
+  "order": [
+    "faq-hero",
+    "faq-cta",
+    "faq-main"
+  ]
+}

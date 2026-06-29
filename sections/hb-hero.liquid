@@ -1,0 +1,49 @@
+{%- comment -%} sections/hb-hero.liquid — full-width hero video. Styled by hb-home.css {%- endcomment -%}
+<section class="hero">
+  {%- if section.settings.video != blank -%}
+    {{
+      section.settings.video
+      | video_tag:
+        class: 'hero__media',
+        autoplay: true,
+        loop: true,
+        muted: true,
+        controls: false,
+        playsinline: true,
+        preload: 'auto',
+        image_size: '2880x'
+    }}
+  {%- else -%}
+    <video
+      class="hero__media"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      aria-label="{{ shop.name }}"
+    >
+      <source src="{{ 'Hoodburger-animation-2026.mp4' | asset_url }}" type="video/mp4">
+    </video>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "HB Hero",
+  "tag": "section",
+  "class": "hb-hero-section",
+  "settings": [
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Hero video (optional — leave empty to use default animation)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "HB Hero"
+    }
+  ]
+}
+{% endschema %}

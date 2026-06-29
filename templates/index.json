@@ -1,0 +1,75 @@
+{
+  "sections": {
+    "hb_hero": {
+      "type": "hb-hero",
+      "settings": {}
+    },
+    "hb_cta_bar": {
+      "type": "hb-cta-bar",
+      "settings": {
+        "headline": "Eat hamburgers, become a Wizard, get rewards.",
+        "rewards_label": "Rewards",
+        "rewards_link": "/pages/rewards",
+        "order_label": "Order Now",
+        "order_link": "/pages/order-now"
+      }
+    },
+    "hb_promos": {
+      "type": "hb-promos",
+      "blocks": {
+        "promo_menu": {
+          "type": "promo",
+          "settings": {
+            "fallback_asset": "hb-promo-menu.jpg",
+            "title": "Classic fast food. Real ingredients.",
+            "button_label": "Menu",
+            "button_link": "/pages/menu",
+            "featured_mobile": false
+          }
+        },
+        "promo_locations": {
+          "type": "promo",
+          "settings": {
+            "fallback_asset": "hb-promo-locations.jpg",
+            "title": "You're closer than you think.",
+            "button_label": "Find Location",
+            "button_link": "/pages/store-locator",
+            "featured_mobile": true
+          }
+        },
+        "promo_careers": {
+          "type": "promo",
+          "settings": {
+            "fallback_asset": "hb-promo-careers.jpg",
+            "title": "Work at Hoodburger.",
+            "button_label": "Careers",
+            "button_link": "/pages/careers",
+            "featured_mobile": false
+          }
+        },
+        "promo_catering": {
+          "type": "promo",
+          "settings": {
+            "fallback_asset": "hb-promo-catering.jpg",
+            "title": "Hoodburger at your function.",
+            "button_label": "Catering",
+            "button_link": "/pages/catering",
+            "featured_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "promo_menu",
+        "promo_locations",
+        "promo_careers",
+        "promo_catering"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "hb_hero",
+    "hb_cta_bar",
+    "hb_promos"
+  ]
+}

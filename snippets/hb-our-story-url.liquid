@@ -1,0 +1,26 @@
+{%- doc -%}
+  Outputs the Our Story / About page URL.
+  Resolves the live Shopify page by handle or title, with a safe fallback.
+{%- enddoc -%}
+{%- liquid
+  assign our_story_url = ''
+
+  if pages.about != blank
+    assign our_story_url = pages.about.url
+  elsif pages['our-story'] != blank
+    assign our_story_url = pages['our-story'].url
+  else
+    for p in pages
+      assign page_title_key = p.title | downcase | strip
+      if page_title_key == 'our story' or page_title_key == 'about'
+        assign our_story_url = p.url
+        break
+      endif
+    endfor
+  endif
+
+  if our_story_url == blank
+    assign our_story_url = '/pages/about'
+  endif
+-%}
+{{- our_story_url -}}

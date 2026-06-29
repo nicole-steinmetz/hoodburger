@@ -19,10 +19,8 @@
     "contact": {
       "type": "hb-contact",
       "settings": {
-        "form_url": "https://form.jotform.com/261763674524060",
-        "form_title": "Customer Complaint Form",
-        "iframe_id": "JotFormIFrame-261763674524060",
-        "iframe_min_height": 540
+        "heading": "Contact",
+        "form_height": 539
       }
     }
   },

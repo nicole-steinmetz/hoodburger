@@ -1,0 +1,455 @@
+{
+  "tabs": [
+    {
+      "id": "burgers",
+      "label": "Burgers"
+    },
+    {
+      "id": "sides",
+      "label": "Sides and Sauces"
+    },
+    {
+      "id": "drinks",
+      "label": "Cold Drinks"
+    }
+  ],
+  "categories": [
+    {
+      "id": "burgers",
+      "sections": [
+        {
+          "title": "Burger Menu",
+          "items": [
+            {
+              "title": "Cheeseburger",
+              "description": "150g organic smashed beef patty with American cheddar, minced onion, dill pickles, mustard and ketchup. Try with heavy cheese and/or bacon!",
+              "badges": [
+                "Nut-free",
+                "Sesame risk"
+              ],
+              "image": "hb-menu-cheeseburger.jpg"
+            },
+            {
+              "title": "Deluxe Cheeseburger",
+              "description": "150g organic smashed beef patty with American cheddar, minced onion, dill pickles, mustard, ketchup, mayonnaise, lettuce and tomato. Try with heavy cheese and/or bacon!",
+              "badges": [
+                "Sesame risk",
+                "Nut-free"
+              ],
+              "image": "hb-menu-deluxe-cheeseburger.jpg"
+            },
+            {
+              "title": "Double Cheeseburger",
+              "description": "Two 150g organic smashed beef patties with two slices of American cheddar, minced onion, dill pickles, mustard and ketchup. Try with heavy cheese and/or bacon!",
+              "badges": [
+                "Sesame risk",
+                "Nut-free"
+              ],
+              "image": "hb-menu-double-cheeseburger.jpg"
+            },
+            {
+              "title": "Hot Cheeseburger",
+              "description": "150g organic smashed beef with American cheddar, minced onion, dill pickles, jalapeños, mustard and Carolina Reaper ketchup. Warning: It is actually hot. Try it with heavy cheese and/or bacon!",
+              "badges": [
+                "Sesame risk",
+                "Nut-free"
+              ],
+              "image": "hb-menu-hot-cheeseburger.jpg"
+            },
+            {
+              "title": "Double Supreme",
+              "description": "Two 150g organic beef patties with two slices of American cheddar, jalapeño and pickle sauce, lettuce, minced onion and dill pickles. Try with heavy cheese and/or bacon!",
+              "badges": [
+                "Nut-free",
+                "Sesame risk"
+              ],
+              "image": "hb-menu-double-supreme.jpg"
+            },
+            {
+              "title": "Swiss Mushroom",
+              "description": "150g organic smashed beef patty with double Swiss cheese, mayonnaise and a rich mushroom gravy. Try it with bacon and/or a thick patty!",
+              "badges": [
+                "Nut-free",
+                "Sesame risk"
+              ],
+              "image": "hb-menu-swiss-mushroom.jpg"
+            },
+            {
+              "title": "Ribwich",
+              "description": "150g organic pork smashed patty, sweet BBQ sauce, onions, dill pickles. Try it with bacon and/or jalapeños!",
+              "badges": [
+                "Sesame risk",
+                "Nut-free"
+              ],
+              "image": "hb-menu-ribwich.jpg"
+            },
+            {
+              "title": "Tender Deluxe",
+              "description": "Two original chicken tenders with American cheddar, lettuce, tomato, minced onion, dill pickles, mustard, ketchup and mayonnaise. Try it with bacon and/or heavy cheese!",
+              "badges": [
+                "Sesame risk",
+                "Nut-free",
+                "Halal"
+              ],
+              "image": "hb-menu-tender-deluxe.jpg"
+            },
+            {
+              "title": "Hot Tender Sandwich",
+              "description": "Two hot & spicy chicken tenders with hot smokey mayonnaise, dill pickles, jalapeños and lettuce. Warning: It is actually hot. Try it with heavy cheese and/or bacon!",
+              "badges": [
+                "Nut-free",
+                "Halal",
+                "Sesame risk"
+              ],
+              "image": "hb-menu-hot-tender-sandwich.jpg"
+            },
+            {
+              "title": "Tender Mash and Gravy",
+              "description": "Two original chicken tenders with American cheddar, creamy mashed potato and rich chicken gravy. Try to with heavy cheese and/or bacon!",
+              "badges": [
+                "Nut-free",
+                "Halal"
+              ],
+              "image": "hb-menu-tender-mash-and-gravy.jpg"
+            },
+            {
+              "title": "Honey Butter Sandwich",
+              "description": "Two original chicken tenders with American cheddar, lettuce, tomato, minced onion, dill pickles, mustard, ketchup and mayonnaise. Try it with bacon and/or heavy cheese!",
+              "badges": [
+                "Nut-free",
+                "Halal"
+              ],
+              "image": "hb-menu-honey-butter-sandwich.jpg"
+            },
+            {
+              "title": "Tender Supreme",
+              "description": "Two original chicken tenders with American cheddar, lettuce, minced onion, dill pickles and our house made jalapeño mayo! Try it with bacon and/or heavy cheese!",
+              "badges": [
+                "Nut-free",
+                "Halal"
+              ],
+              "image": "hb-menu-tender-supreme.jpg"
+            },
+            {
+              "title": "Golden Curry Tender Sandwich",
+              "description": "Two original chicken tenders with American cheddar, Japanese Golden Curry® sauce and dill pickles. Try it with bacon and/or mashed potato!",
+              "badges": [
+                "Nut-free",
+                "Halal"
+              ],
+              "image": "hb-menu-golden-curry-tender-sandwich.jpg"
+            },
+            {
+              "title": "Kids Burger",
+              "description": "Smaller milk bun, organic smashed beef mini patty, American cheddar and ketchup!",
+              "badges": [
+                "Nut-free",
+                "Sesame risk"
+              ],
+              "image": "hb-menu-kids-burger.jpg"
+            },
+            {
+              "title": "Chicken Long",
+              "description": "Original fried chicken breast with double American cheddar, lettuce, mayonnaise on a long sesame seed bun. Try it with bacon!",
+              "badges": [
+                "Nut-free",
+                "Halal",
+                "Sesame risk"
+              ],
+              "image": "hb-menu-chicken-long.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sides",
+      "sections": [
+        {
+          "title": "Sides and Sauces",
+          "items": [
+            {
+              "title": "French Fries Large",
+              "description": "",
+              "badges": [
+                "Dairy-free",
+                "Egg-free",
+                "Nut-free",
+                "Halal",
+                "Vegetarian",
+                "Soy-free"
+              ],
+              "image": "hb-menu-french-fries-large.jpg"
+            },
+            {
+              "title": "French Fries Regular",
+              "description": "",
+              "badges": [
+                "Egg-free",
+                "Nut-free",
+                "Soy-free",
+                "Dairy-free",
+                "Halal",
+                "Vegetarian"
+              ],
+              "image": "hb-menu-french-fries-regular.jpg"
+            },
+            {
+              "title": "French Fries Small",
+              "description": "",
+              "badges": [
+                "Dairy-free",
+                "Egg-free",
+                "Nut-free",
+                "Halal",
+                "Vegetarian",
+                "Soy-free"
+              ],
+              "image": "hb-menu-french-fries-small.jpg"
+            },
+            {
+              "title": "Dill Pickles Cup",
+              "description": "",
+              "badges": [
+                "Dairy-free",
+                "Egg-free",
+                "Nut-free",
+                "Halal",
+                "Vegetarian",
+                "Soy-free"
+              ],
+              "image": "hb-menu-dill-pickles-cup.jpg"
+            },
+            {
+              "title": "Chicken Tender - 1 Pack",
+              "description": "",
+              "badges": [
+                "Dairy-free",
+                "Egg-free",
+                "Nut-free",
+                "Halal"
+              ],
+              "image": "hb-menu-chicken-tender-1-pack.jpg"
+            },
+            {
+              "title": "Chicken Tender - 2 Pack",
+              "description": "",
+              "badges": [
+                "Dairy-free",
+                "Egg-free",
+                "Nut-free",
+                "Halal"
+              ],
+              "image": "hb-menu-chicken-tender-2-pack.jpg"
+            },
+            {
+              "title": "Chicken Tender - 3 Pack",
+              "description": "",
+              "badges": [
+                "Dairy-free",
+                "Nut-free",
+                "Egg-free",
+                "Halal"
+              ],
+              "image": "hb-menu-chicken-tender-3-pack.jpg"
+            },
+            {
+              "title": "Mash & Gravy",
+              "description": "",
+              "badges": [
+                "Egg-free",
+                "Nut-free",
+                "Halal",
+                "Dairy-free"
+              ],
+              "image": "hb-menu-mash-gravy.jpg"
+            },
+            {
+              "title": "Jalapeno Mayo Cup",
+              "description": "",
+              "badges": [
+                "Vegetarian",
+                "Dairy-free",
+                "Nut-free",
+                "Halal"
+              ],
+              "image": "hb-menu-jalapeno-mayo-cup.jpg"
+            },
+            {
+              "title": "Burger Sauce Cup",
+              "description": "",
+              "badges": [
+                "Vegetarian",
+                "Dairy-free",
+                "Nut-free",
+                "Halal"
+              ],
+              "image": "hb-menu-burger-sauce-cup.jpg"
+            },
+            {
+              "title": "Ranch Cup",
+              "description": "",
+              "badges": [
+                "Vegetarian",
+                "Dairy-free",
+                "Egg-free",
+                "Nut-free",
+                "Halal"
+              ],
+              "image": "hb-menu-ranch-cup.jpg"
+            },
+            {
+              "title": "Gravy Cup",
+              "description": "",
+              "badges": [
+                "Egg-free",
+                "Nut-free",
+                "Halal"
+              ],
+              "image": "hb-menu-gravy-cup.jpg"
+            },
+            {
+              "title": "Hot Smokey Mayo Cup",
+              "description": "",
+              "badges": [
+                "Egg-free",
+                "Nut-free",
+                "Vegetarian",
+                "Dairy-free",
+                "Halal"
+              ],
+              "image": "hb-menu-hot-smokey-mayo-cup.jpg"
+            },
+            {
+              "title": "Blue Cheese Cup",
+              "description": "",
+              "badges": [
+                "Vegetarian",
+                "Nut-free",
+                "Halal"
+              ],
+              "image": "hb-menu-blue-cheese-cup.jpg"
+            },
+            {
+              "title": "Reaper Ketchup Cup",
+              "description": "",
+              "badges": [
+                "Dairy-free",
+                "Nut-free",
+                "Egg-free",
+                "Halal",
+                "Vegetarian",
+                "Soy-free"
+              ],
+              "image": "hb-menu-reaper-ketchup-cup.jpg"
+            },
+            {
+              "title": "Queso Cup",
+              "description": "",
+              "badges": [
+                "Nut-free",
+                "Vegetarian",
+                "Egg-free",
+                "Halal"
+              ],
+              "image": "hb-menu-queso-cup.jpg"
+            },
+            {
+              "title": "Ketchup Cup",
+              "description": "",
+              "badges": [
+                "Dairy-free",
+                "Egg-free",
+                "Nut-free",
+                "Vegetarian",
+                "Halal",
+                "Soy-free"
+              ],
+              "image": "hb-menu-ketchup-cup.jpg"
+            },
+            {
+              "title": "Golden Curry Cup",
+              "description": "",
+              "badges": [
+                "Dairy-free",
+                "Vegetarian",
+                "Egg-free",
+                "Nut-free",
+                "Halal"
+              ],
+              "image": "hb-menu-golden-curry-cup.jpg"
+            },
+            {
+              "title": "Honey Mustard Cup",
+              "description": "",
+              "badges": [
+                "Egg-free",
+                "Nut-free",
+                "Vegetarian",
+                "Halal"
+              ],
+              "image": "hb-menu-honey-mustard-cup.jpg"
+            },
+            {
+              "title": "Sweet BBQ Cup",
+              "description": "",
+              "badges": [
+                "Vegetarian",
+                "Egg-free",
+                "Nut-free",
+                "Halal"
+              ],
+              "image": "hb-menu-sweet-bbq-cup.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "drinks",
+      "sections": [
+        {
+          "title": "Cold Drinks",
+          "items": [
+            {
+              "title": "Dr Pepper",
+              "description": "",
+              "badges": [],
+              "image": "hb-menu-dr-pepper.jpg"
+            },
+            {
+              "title": "Jarritos",
+              "description": "Lime",
+              "badges": [],
+              "image": "hb-menu-jarritos.jpg"
+            },
+            {
+              "title": "Coke",
+              "description": "Can — Cherry, No Sugar, Vanilla",
+              "badges": [],
+              "image": "hb-menu-coke.jpg"
+            },
+            {
+              "title": "Fanta",
+              "description": "Grape Can Peach Can Pineapple Can Strawberry Can Berry Can",
+              "badges": [],
+              "image": "hb-menu-fanta.jpg"
+            },
+            {
+              "title": "Arizona Grapeade",
+              "description": "",
+              "badges": [],
+              "image": "hb-menu-arizona-grapeade.jpg"
+            },
+            {
+              "title": "Passiona",
+              "description": "",
+              "badges": [],
+              "image": "hb-menu-passiona.jpg"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

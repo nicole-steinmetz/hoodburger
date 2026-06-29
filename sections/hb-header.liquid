@@ -1,0 +1,108 @@
+{%- comment -%} sections/hb-header.liquid — custom Hoodburger header (replaces Dawn's). Styled by hb-home.css {%- endcomment -%}
+{%- liquid
+  assign logo_url = section.settings.logo_link
+  if logo_url == blank
+    assign logo_url = routes.root_url
+  endif
+
+  assign cta_href = section.settings.cta_link
+  assign cta_label_key = section.settings.cta_label | downcase | strip
+  if cta_href == blank and cta_label_key == 'order now'
+    if pages['order-now'] != blank
+      assign cta_href = pages['order-now'].url
+    else
+      assign cta_href = '/pages/order-now'
+    endif
+  elsif cta_href == blank
+    assign cta_href = '#'
+  endif
+-%}
+<header class="site-header">
+  <input type="checkbox" id="nav-toggle-{{ section.id }}" class="nav__toggle-input" aria-hidden="true">
+
+  <div class="container nav">
+    <a class="nav__logo" href="{{ logo_url }}" aria-label="{{ shop.name }} home">
+      {%- if section.settings.logo != blank -%}
+        {{ section.settings.logo | image_url: width: 720 | image_tag: alt: shop.name, class: 'nav__logo-img', loading: 'eager' }}
+      {%- else -%}
+        <img class="nav__logo-icon" src="{{ 'hb-logo-icon.svg' | asset_url }}" alt="" width="106" height="100" loading="eager">
+        <span class="nav__logo-wordmark-wrap" aria-hidden="true">
+          <img class="nav__logo-wordmark" src="{{ 'hb-nav-logo.svg' | asset_url }}" alt="" width="166" height="73" loading="eager">
+        </span>
+      {%- endif -%}
+    </a>
+
+    <label for="nav-toggle-{{ section.id }}" class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer-{{ section.id }}">
+      <span></span><span></span><span></span>
+    </label>
+
+    <nav class="nav__menu" aria-label="Primary">
+      <ul class="nav__links">
+        {% render 'hb-nav-links', variant: 'desktop' %}
+      </ul>
+    </nav>
+
+    {%- if section.settings.cta_label != blank -%}
+      <a class="btn btn--order nav__cta" href="{{ cta_href }}">{{ section.settings.cta_label }}</a>
+    {%- endif -%}
+  </div>
+
+  <aside class="nav__drawer" id="nav-drawer-{{ section.id }}" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="nav__drawer-top">
+      <a class="nav__drawer-logo" href="{{ logo_url }}" aria-label="{{ shop.name }} home">
+        {%- if section.settings.logo != blank -%}
+          {{ section.settings.logo | image_url: width: 480 | image_tag: alt: shop.name, class: 'nav__drawer-logo-img', loading: 'eager' }}
+        {%- else -%}
+          <img class="nav__drawer-logo-img" src="{{ 'hb-footer-logo.svg' | asset_url }}" alt="{{ shop.name }}" width="319" height="50" loading="eager">
+        {%- endif -%}
+      </a>
+      <button type="button" class="nav__close" aria-label="Close menu">
+        <span aria-hidden="true">X</span>
+      </button>
+    </div>
+
+    <nav class="nav__drawer-nav" aria-label="Primary">
+      <ul class="nav__drawer-links">
+        {% render 'hb-nav-links', variant: 'drawer' %}
+      </ul>
+    </nav>
+  </aside>
+</header>
+
+<script src="{{ 'hb-nav.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "HB Header",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Custom logo (optional — leave empty to use default Hoodburger logo)" },
+    { "type": "url", "id": "logo_link", "label": "Logo link (defaults to store home page)" },
+    { "type": "link_list", "id": "menu", "label": "Navigation menu (used if no link blocks below)" },
+    { "type": "text", "id": "cta_label", "label": "CTA button label", "default": "Order Now" },
+    { "type": "url", "id": "cta_link", "label": "CTA button link" }
+  ],
+  "blocks": [
+    {
+      "type": "nav_link",
+      "name": "Nav link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Link" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HB Header",
+      "blocks": [
+        { "type": "nav_link", "settings": { "label": "Menu" } },
+        { "type": "nav_link", "settings": { "label": "Locations", "link": "/pages/locations" } },
+        { "type": "nav_link", "settings": { "label": "About", "link": "/pages/about" } },
+        { "type": "nav_link", "settings": { "label": "Rewards", "link": "/pages/rewards" } },
+        { "type": "nav_link", "settings": { "label": "Catering", "link": "/pages/catering" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

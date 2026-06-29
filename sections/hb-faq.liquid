@@ -1,0 +1,191 @@
+{%- comment -%}
+  sections/hb-faq.liquid
+  FAQ category nav + grouped accordion + FAQPage JSON-LD.
+  Figma refs: 17:14514 (desktop), 17:18777 (mobile).
+  JS: hb-faq.js (deferred). Single-open accordion; category nav reuses menu-tabs (yellow slider).
+{%- endcomment -%}
+
+{{ 'hb-faq.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'hb-faq.js' | asset_url }}" defer></script>
+
+<section class="faq" id="hb-faq-{{ section.id }}">
+  <nav class="menu-tabs" id="hb-faq-tabs-{{ section.id }}" aria-label="FAQ categories">
+    <div class="container menu-tabs__inner">
+      <div class="menu-tabs__nav">
+        <ul class="menu-tabs__list" role="list">
+          {%- assign first_category = true -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'category' -%}
+              {%- assign nav_anchor = block.settings.anchor | default: block.settings.label | handleize -%}
+              <li {{ block.shopify_attributes }}>
+                <a
+                  class="menu-tabs__link{% if first_category %} is-active{% endif %}"
+                  href="#{{ nav_anchor }}"
+                >
+                  {{- block.settings.label -}}
+                </a>
+              </li>
+              {%- assign first_category = false -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+        <div class="menu-tabs__track" aria-hidden="true">
+          <span class="menu-tabs__indicator"></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container faq__inner">
+    {%- if section.settings.page_title != blank -%}
+      <h1 class="faq__title">{{ section.settings.page_title }}</h1>
+    {%- endif -%}
+
+    <div class="faq__groups">
+      {%- assign list_open = false -%}
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'category' -%}
+            {%- if list_open -%}
+                  </ul>
+                </div>
+            {%- endif -%}
+            {%- assign group_anchor = block.settings.anchor | default: block.settings.label | handleize -%}
+            <div class="faq__group menu__section" id="{{ group_anchor }}" {{ block.shopify_attributes }}>
+              <h2 class="faq__group-heading">{{ block.settings.label }}</h2>
+              <ul class="faq-list" role="list">
+            {%- assign list_open = true -%}
+
+          {%- when 'item' -%}
+            {%- if list_open -%}
+              {%- assign is_open = block.settings.default_open -%}
+              <li class="faq-item" {{ block.shopify_attributes }}>
+                <button
+                  class="faq-item__toggle"
+                  type="button"
+                  aria-expanded="{{ is_open }}"
+                  aria-controls="faq-body-{{ block.id }}"
+                >
+                  <img
+                    class="faq-item__marker"
+                    src="{{ 'icon-circle-outline.svg' | asset_url }}"
+                    alt=""
+                    width="14"
+                    height="14"
+                    aria-hidden="true"
+                    loading="lazy"
+                  >
+                  <span class="faq-item__label">{{ block.settings.label }}</span>
+                  <span class="faq-item__icon" aria-hidden="true">+</span>
+                </button>
+                <div
+                  id="faq-body-{{ block.id }}"
+                  class="faq-item__body"
+                  {% unless is_open %}hidden{% endunless %}
+                >
+                  {%- if block.settings.content != blank -%}
+                    {{ block.settings.content }}
+                  {%- endif -%}
+                </div>
+              </li>
+            {%- endif -%}
+        {%- endcase -%}
+      {%- endfor -%}
+      {%- if list_open -%}
+            </ul>
+          </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{%- comment -%} FAQPage JSON-LD — AI search citation. {%- endcomment -%}
+{%- capture faq_schema -%}
+  {%- assign schema_first = true -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'item' and block.settings.content != blank -%}
+      {%- unless schema_first -%},{%- endunless -%}
+      {
+        "@type": "Question",
+        "name": {{ block.settings.label | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ block.settings.content | strip_html | json }}
+        }
+      }
+      {%- assign schema_first = false -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if faq_schema != blank -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{{ faq_schema }}]
+}
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "HB FAQ",
+  "tag": "section",
+  "class": "hb-faq-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "page_title",
+      "label": "Page heading",
+      "default": "Frequently asked questions"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Category heading"
+        },
+        {
+          "type": "text",
+          "id": "anchor",
+          "label": "Anchor ID",
+          "info": "Used for nav jump-links, e.g. menu-dietary-information. Defaults to a slug of the heading."
+        }
+      ]
+    },
+    {
+      "type": "item",
+      "name": "FAQ item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Question"
+        },
+        {
+          "type": "html",
+          "id": "content",
+          "label": "Answer",
+          "info": "HTML allowed for lists and links."
+        },
+        {
+          "type": "checkbox",
+          "id": "default_open",
+          "label": "Open by default",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HB FAQ"
+    }
+  ]
+}
+{% endschema %}

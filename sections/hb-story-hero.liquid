@@ -1,0 +1,178 @@
+{%- comment -%}
+  sections/hb-story-hero.liquid — Our Story / About page hero.
+  Styled by assets/hb-story.css (loaded by hb-story-about, the last section,
+  so it loads once for the page; loaded here too so the hero is never unstyled).
+
+  Figma refs:
+    Desktop  → cRjbVkrcT1wMuRheABgpPZ node 17:13043
+    Mobile   → cRjbVkrcT1wMuRheABgpPZ node 17:13297
+
+  Layout:
+    - Full-bleed hero photo (desktop ratio 1440×964; mobile 393×814)
+    - No earn-points / Order Now badge on this page (Order Now page only)
+
+  Theme dev rules:
+    - HTML/Liquid first. All content server-side, indexable without JS. No JS here.
+    - Defer any non-critical scripts (none in this section).
+{%- endcomment -%}
+
+{{ 'hb-story.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign hero_desktop = section.settings.hero_asset | default: 'hb-story-hero.jpg'
+  assign hero_mobile  = section.settings.hero_asset_mobile | default: 'hb-story-hero-mobile.jpg'
+  assign hero_alt     = section.settings.hero_alt | default: page.title | default: 'Inside a Hoodburger kitchen'
+-%}
+
+<section class="story-hero" data-section-id="{{ section.id }}">
+  <picture class="story-hero__picture">
+    {%- if section.settings.hero_image != blank and section.settings.hero_image_mobile != blank -%}
+      <source
+        media="(min-width: 750px)"
+        srcset="
+          {{ section.settings.hero_image | image_url: width: 1500 }} 1500w,
+          {{ section.settings.hero_image | image_url: width: 2000 }} 2000w,
+          {{ section.settings.hero_image | image_url: width: 2880 }} 2880w
+        "
+        sizes="100vw"
+      >
+      {{
+        section.settings.hero_image_mobile
+        | image_url: width: 800
+        | image_tag:
+          class: 'story-hero__img',
+          loading: 'eager',
+          fetchpriority: 'high',
+          widths: '400, 800',
+          sizes: '100vw',
+          alt: hero_alt
+      }}
+    {%- elsif section.settings.hero_image != blank -%}
+      <source
+        media="(max-width: 749px)"
+        srcset="{{ hero_mobile | asset_url }}"
+      >
+      {{
+        section.settings.hero_image
+        | image_url: width: 2880
+        | image_tag:
+          class: 'story-hero__img',
+          loading: 'eager',
+          fetchpriority: 'high',
+          widths: '750, 1100, 1500, 2000, 2880',
+          sizes: '100vw',
+          alt: hero_alt
+      }}
+    {%- elsif section.settings.hero_image_mobile != blank -%}
+      <source media="(min-width: 750px)" srcset="{{ hero_desktop | asset_url }}">
+      {{
+        section.settings.hero_image_mobile
+        | image_url: width: 800
+        | image_tag:
+          class: 'story-hero__img',
+          loading: 'eager',
+          fetchpriority: 'high',
+          widths: '400, 800',
+          sizes: '100vw',
+          alt: hero_alt
+      }}
+    {%- else -%}
+      <source media="(min-width: 750px)" srcset="{{ hero_desktop | asset_url }}">
+      <img
+        class="story-hero__img"
+        src="{{ hero_mobile | asset_url }}"
+        alt="{{ hero_alt | escape }}"
+        width="393"
+        height="814"
+        loading="eager"
+        fetchpriority="high"
+      >
+    {%- endif -%}
+  </picture>
+
+  {%- comment -%} FLAG (confirm): badge desktop-only — see hb-story.css @media 750px {%- endcomment -%}
+  {%- if section.settings.show_badge -%}
+    {%- if section.settings.earn_points_badge != blank -%}
+      <img
+        class="story-hero__badge"
+        src="{{ section.settings.earn_points_badge | asset_url }}"
+        alt="{{ section.settings.earn_points_badge_alt | default: 'Earn loyalty points' | escape }}"
+        width="186"
+        height="70"
+        loading="eager"
+      >
+    {%- endif -%}
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "HB Story Hero",
+  "tag": "section",
+  "class": "hb-story-hero-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero image"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image — desktop (overrides asset below)"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_mobile",
+      "label": "Hero image — mobile (overrides mobile asset below)"
+    },
+    {
+      "type": "text",
+      "id": "hero_asset",
+      "label": "Desktop hero asset filename",
+      "info": "Theme asset in /assets",
+      "default": "hb-story-hero.jpg"
+    },
+    {
+      "type": "text",
+      "id": "hero_asset_mobile",
+      "label": "Mobile hero asset filename",
+      "info": "Theme asset in /assets",
+      "default": "hb-story-hero-mobile.jpg"
+    },
+    {
+      "type": "text",
+      "id": "hero_alt",
+      "label": "Hero alt text",
+      "default": "Inside a Hoodburger kitchen"
+    },
+    {
+      "type": "header",
+      "content": "Earn-points badge (desktop only)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show earn-points badge",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "earn_points_badge",
+      "label": "Badge asset filename",
+      "info": "Theme asset in /assets (reuses the Order Now badge)",
+      "default": "hb-earn-points-badge.png"
+    },
+    {
+      "type": "text",
+      "id": "earn_points_badge_alt",
+      "label": "Badge alt text",
+      "default": "Earn loyalty points"
+    }
+  ],
+  "presets": [
+    {
+      "name": "HB Story Hero"
+    }
+  ]
+}
+{% endschema %}

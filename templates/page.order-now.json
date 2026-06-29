@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "order_now": {
+      "type": "hb-storepoint-page",
+      "settings": {
+        "heading": "Order Now",
+        "hero_asset": "hb-order-now-hero.png",
+        "hero_asset_mobile": "Hoodburger_Order_now_mobile.png",
+        "storepoint_map_id": "16a29894aabfbe"
+      }
+    }
+  },
+  "order": [
+    "order_now"
+  ]
+}

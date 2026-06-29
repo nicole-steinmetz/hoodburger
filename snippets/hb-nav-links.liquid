@@ -1,0 +1,115 @@
+{%- comment -%}
+  Renders header nav link list items.
+  variant: "desktop" (default) | "drawer"
+{%- endcomment -%}
+{%- liquid
+  assign link_variant = variant | default: 'desktop'
+-%}
+{%- if section.blocks.size > 0 -%}
+  {%- for block in section.blocks -%}
+    {%- if block.settings.label != blank -%}
+      {%- liquid
+        assign nav_href = block.settings.link
+        assign nav_label_key = block.settings.label | downcase | strip
+
+        if nav_label_key == 'rewards'
+          if pages.rewards != blank
+            assign nav_href = pages.rewards.url
+          else
+            assign nav_href = '/pages/rewards'
+          endif
+        elsif nav_label_key == 'menu'
+          if pages.menu != blank
+            assign nav_href = pages.menu.url
+          elsif nav_href == blank
+            assign nav_href = '/pages/menu'
+          endif
+        elsif nav_label_key == 'locations'
+          capture nav_href
+            render 'hb-locations-url'
+          endcapture
+          assign nav_href = nav_href | strip
+        elsif nav_label_key == 'about' or nav_label_key == 'our story'
+          capture nav_href
+            render 'hb-our-story-url'
+          endcapture
+          assign nav_href = nav_href | strip
+        elsif nav_label_key == 'catering'
+          if pages.catering != blank
+            assign nav_href = pages.catering.url
+          elsif nav_href == blank
+            assign nav_href = '/pages/catering'
+          endif
+        elsif nav_href == blank
+          assign nav_href = '#'
+        endif
+
+        assign nav_active = false
+        if nav_label_key == 'rewards' and template.name == 'page' and page.handle == 'rewards'
+          assign nav_active = true
+        elsif nav_label_key == 'menu' and template.name == 'page' and page.handle == 'menu'
+          assign nav_active = true
+        elsif nav_label_key == 'locations' and template.name == 'page' and page.handle == 'locations'
+          assign nav_active = true
+        elsif nav_label_key == 'locations' and template.name == 'page' and page.handle == 'store-locator'
+          assign nav_active = true
+        elsif nav_label_key == 'about' and template.name == 'page' and page.handle == 'about'
+          assign nav_active = true
+        elsif nav_label_key == 'about' and template.name == 'page' and page.handle == 'our-story'
+          assign nav_active = true
+        elsif nav_label_key == 'catering' and template.name == 'page' and page.handle == 'catering'
+          assign nav_active = true
+        elsif nav_href != blank and nav_href != '#'
+          assign nav_path = nav_href | split: '?' | first
+          if request.path == nav_path
+            assign nav_active = true
+          endif
+        endif
+
+        assign nav_index = forloop.index | prepend: '00' | slice: -2, 2
+      -%}
+      <li {{ block.shopify_attributes }}>
+        {%- if link_variant == 'drawer' -%}
+          <a
+            class="nav-drawer__link{% if nav_active %} is-active{% endif %}"
+            href="{{ nav_href }}"
+            {% if nav_active %}aria-current="page"{% endif %}
+          >
+            <span class="nav-drawer__index" aria-hidden="true">{{ nav_index }}</span>
+            <span class="nav-drawer__label">{{ block.settings.label }}</span>
+          </a>
+        {%- else -%}
+          <a
+            class="nav-item{% if nav_active %} active{% endif %}"
+            href="{{ nav_href }}"
+            {% if nav_active %}aria-current="page"{% endif %}
+          >{{ block.settings.label }}</a>
+        {%- endif -%}
+      </li>
+    {%- endif -%}
+  {%- endfor -%}
+{%- elsif section.settings.menu != blank -%}
+  {%- for link in section.settings.menu.links -%}
+    {%- liquid
+      assign nav_index = forloop.index | prepend: '00' | slice: -2, 2
+    -%}
+    <li>
+      {%- if link_variant == 'drawer' -%}
+        <a
+          class="nav-drawer__link{% if link.active %} is-active{% endif %}"
+          href="{{ link.url }}"
+          {% if link.active %}aria-current="page"{% endif %}
+        >
+          <span class="nav-drawer__index" aria-hidden="true">{{ nav_index }}</span>
+          <span class="nav-drawer__label">{{ link.title }}</span>
+        </a>
+      {%- else -%}
+        <a
+          class="nav-item{% if link.active %} active{% endif %}"
+          href="{{ link.url }}"
+          {% if link.active %}aria-current="page"{% endif %}
+        >{{ link.title }}</a>
+      {%- endif -%}
+    </li>
+  {%- endfor -%}
+{%- endif -%}
