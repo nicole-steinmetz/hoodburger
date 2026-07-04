@@ -13,6 +13,8 @@
       "type": "hb-rewards-hero",
       "settings": {
         "fallback_asset": "hb-rewards-hero.jpg",
+        "fallback_asset_mobile": "hb-rewards-hero-mobile.jpg",
+        "hero_alt": "The Round Table",
         "mobile_cta_label": "ORDER NOW",
         "mobile_cta_link": "/pages/order-now"
       }
@@ -20,13 +22,31 @@
     "rewards-cta": {
       "type": "hb-cta-bar",
       "settings": {
-        "button_style": "order",
         "headline": "Eat hamburgers, become a Wizard, get rewards.",
-        "rewards_label": "ORDER NOW",
-        "rewards_link": "/pages/order-now",
         "order_label": "ORDER NOW",
         "order_link": "/pages/order-now"
       }
+    },
+    "rewards-highlights": {
+      "type": "hb-rewards-highlights",
+      "blocks": {
+        "founding-members": {
+          "type": "highlight",
+          "settings": {
+            "heading": "⚡ 2026 Founding Members — the fast track",
+            "body": "<p>Join in 2026 and you skip NPC entirely — you start as a Wastelander, and earn double points from 1 July to 30 September to power up the ranks. It's the fastest the climb will ever be. From 2027, everyone starts at the bottom.</p>"
+          }
+        },
+        "birthday-cheeseburger": {
+          "type": "highlight",
+          "settings": {
+            "heading": "Birthday Cheeseburger",
+            "body": "<p>Every member gets a free cheeseburger on their birthday.</p><ul><li>Be a member for at least 1 month before your birthday.</li><li>Keep email + SMS notifications on — that's how we send it.</li><li>Valid 7 days. One per year. Minimum $10 spend.</li></ul>"
+          }
+        }
+      },
+      "block_order": ["founding-members", "birthday-cheeseburger"],
+      "settings": {}
     },
     "rewards-tiers": {
       "type": "hb-rewards-tiers",
@@ -36,15 +56,16 @@
           "settings": {
             "tier_id": "wastelander",
             "tier_name": "WASTELANDER",
-            "description": "Beginner-level hamburger knowledge and a pocket full of napkins. Your journey begins here, mysterious traveller. We'll have this conversation again.",
+            "description": "The staff member glances like they recognise you from somewhere. Though your true identity remains unknown...for now. The path ahead is yours to choose.",
             "points_per_dollar": "7 Points Per Dollar",
-            "reward_name": "Win Free Large Fries",
-            "reward_body": "<p>At around $25 per visit, that's roughly 3–4 visits depending on what you order.</p>",
+            "reward_name": "Win Free Regular Fries",
+            "reward_body": "<p>At around $25 per visit, that's roughly 3 visits — you earn faster than an NPC.</p>",
             "progress_fill": 46,
-            "milestone_a": "225",
-            "milestone_b": "450",
-            "milestone_c": "675",
-            "milestone_d": "900",
+            "milestone_start": "0",
+            "milestone_a": "125",
+            "milestone_b": "250",
+            "milestone_c": "375",
+            "milestone_d": "500",
             "image_side": "right",
             "fallback_asset": "hb-hero-fries.jpg"
           }
@@ -54,11 +75,12 @@
           "settings": {
             "tier_id": "citizen",
             "tier_name": "YELLOWSTONE CITIZEN",
-            "description": "The staff member glances like they recognise you from somewhere. Though your true identity remains unknown...for now. The path ahead is yours to choose.",
+            "description": "You've earned the respect of the village and tales of your exploits echo through the castle and group chats far and wide. Your order has become a badge of honour.",
             "points_per_dollar": "10 Points Per Dollar",
             "reward_name": "Free Cheeseburger",
-            "reward_body": "<p>At $25 per visit, that's roughly 4 visits — twice as fast as NPC.</p><p>Also unlocks:</p><ul><li>Free Cheeseburger on your birthday</li><li>Christmas exclusive menu access before the general public</li></ul>",
+            "reward_body": "<p>At $25 per visit, that's roughly 4 visits — you earn twice as fast as an NPC.</p><p>Also unlocks:</p><ul><li>Free Tenders 3-pack when you reach Yellowstone</li></ul>",
             "progress_fill": 47,
+            "milestone_start": "0",
             "milestone_a": "250",
             "milestone_b": "500",
             "milestone_c": "750",
@@ -75,8 +97,9 @@
             "description": "Overpowered hero of Yellowstone Castle. Your eyes glow white whenever Hoodburger is mentioned and when it's all said and done, we'll hang your jersey in the rafters.",
             "points_per_dollar": "12 Points Per Dollar",
             "reward_name": "Free Cheeseburger",
-            "reward_body": "<p>At $25 per visit, that's roughly 3 visits.</p><p>Also unlocks:</p><ul><li>Free Cheeseburger when you reach Wizard</li></ul>",
+            "reward_body": "<p>At $25 per visit, that's roughly 3 visits.</p><p>Also unlocks:</p><ul><li>Christmas gift, in-store</li></ul>",
             "progress_fill": 46,
+            "milestone_start": "0",
             "milestone_a": "225",
             "milestone_b": "450",
             "milestone_c": "675",
@@ -144,7 +167,7 @@
           "type": "item",
           "settings": {
             "label": "Birthday reward",
-            "content": "<p>Wastelander, Yellowstone Citizen, and Wizard tier members receive a free Cheeseburger during their birthday month. Valid for 30 days. Minimum $10 spend. Requires at least 1 month of membership. Date of birth is locked once entered.</p>",
+            "content": "<p>Every member receives a free Cheeseburger on their birthday. Requires at least 1 month of membership before your birthday. Keep email and SMS notifications on — that's how we send it. Valid for 7 days. One per year. Minimum $10 spend. Date of birth is locked once entered.</p>",
             "default_open": false
           }
         },
@@ -185,6 +208,7 @@
   "order": [
     "rewards-hero",
     "rewards-cta",
+    "rewards-highlights",
     "rewards-tiers",
     "rewards-tc"
   ]

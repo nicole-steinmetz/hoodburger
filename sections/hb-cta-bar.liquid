@@ -1,24 +1,10 @@
-{%- comment -%} sections/hb-cta-bar.liquid — yellow rewards CTA band. Styled by hb-home.css {%- endcomment -%}
-{%- liquid
-  assign cta_order = false
-  if section.settings.button_style == 'order'
-    assign cta_order = true
-  endif
--%}
-<section class="cta-bar{% if cta_order %} cta-bar--order{% endif %}{% if section.settings.mobile_only %} cta-bar--mobile-only{% endif %}">
+{%- comment -%} sections/hb-cta-bar.liquid — yellow CTA band. Styled by hb-home.css {%- endcomment -%}
+<section class="cta-bar cta-bar--order{% if section.settings.mobile_only %} cta-bar--mobile-only{% endif %}">
   <div class="cta-bar__inner">
     <div class="container cta-bar__content">
     {%- if section.settings.headline != blank -%}
       <p class="cta-bar__text">{{ section.settings.headline }}</p>
     {%- endif -%}
-
-    {%- unless cta_order -%}
-      {%- if section.settings.rewards_label != blank -%}
-        <a class="btn btn--rewards cta-bar__rewards" href="{{ section.settings.rewards_link }}">
-          {{ section.settings.rewards_label }}
-        </a>
-      {%- endif -%}
-    {%- endunless -%}
 
     {%- if section.settings.order_label != blank -%}
       <a class="btn btn--order-mobile cta-bar__order" href="{{ section.settings.order_link | default: '#' }}">
@@ -42,31 +28,10 @@
       "default": false
     },
     {
-      "type": "select",
-      "id": "button_style",
-      "label": "Button style",
-      "options": [
-        { "value": "rewards", "label": "Homepage — Rewards (desktop) / Order (mobile)" },
-        { "value": "order", "label": "Menu — Order Now (all breakpoints)" }
-      ],
-      "default": "rewards"
-    },
-    {
       "type": "text",
       "id": "headline",
       "label": "Headline",
       "default": "Eat hamburgers, become a Wizard, get rewards."
-    },
-    {
-      "type": "text",
-      "id": "rewards_label",
-      "label": "Rewards button label (desktop)",
-      "default": "Rewards"
-    },
-    {
-      "type": "url",
-      "id": "rewards_link",
-      "label": "Rewards button link"
     },
     {
       "type": "text",

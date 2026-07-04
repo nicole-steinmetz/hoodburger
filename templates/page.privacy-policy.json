@@ -10,8 +10,6 @@
       "type": "hb-cta-bar",
       "settings": {
         "headline": "Eat hamburgers, become a Wizard, get rewards.",
-        "rewards_label": "Rewards",
-        "rewards_link": "/pages/rewards",
         "order_label": "Order Now",
         "order_link": "/pages/order-now"
       }

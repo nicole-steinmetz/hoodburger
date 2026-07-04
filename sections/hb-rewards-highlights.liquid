@@ -1,0 +1,68 @@
+{%- comment -%}
+  sections/hb-rewards-highlights.liquid
+  Founding Members + Birthday callouts on the Rewards page.
+  Styled by hb-rewards.css (loaded via hb-rewards-hero).
+{%- endcomment -%}
+
+<section class="rewards-highlights">
+  <div class="rewards-highlights__inner">
+    {%- for block in section.blocks -%}
+      <article class="rewards-highlight" {{ block.shopify_attributes }}>
+        {%- if block.settings.heading != blank -%}
+          <h2 class="rewards-highlight__heading">{{ block.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if block.settings.body != blank -%}
+          <div class="rewards-highlight__body rte">{{ block.settings.body }}</div>
+        {%- endif -%}
+      </article>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HB Rewards Highlights",
+  "tag": "section",
+  "class": "hb-rewards-highlights-section",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "highlight",
+      "name": "Highlight",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Body"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HB Rewards Highlights",
+      "blocks": [
+        {
+          "type": "highlight",
+          "settings": {
+            "heading": "⚡ 2026 Founding Members — the fast track",
+            "body": "<p>Join in 2026 and you skip NPC entirely — you start as a Wastelander, and earn double points from 1 July to 30 September to power up the ranks. It's the fastest the climb will ever be. From 2027, everyone starts at the bottom.</p>"
+          }
+        },
+        {
+          "type": "highlight",
+          "settings": {
+            "heading": "Birthday Cheeseburger",
+            "body": "<p>Every member gets a free cheeseburger on their birthday.</p><ul><li>Be a member for at least 1 month before your birthday.</li><li>Keep email + SMS notifications on — that's how we send it.</li><li>Valid 7 days. One per year. Minimum $10 spend.</li></ul>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

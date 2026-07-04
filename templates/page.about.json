@@ -2,9 +2,7 @@
  * ------------------------------------------------------------
  * Our Story / About page — handle MUST be `about` (footer link_1).
  *
- * FLAG (confirm): cta_bar.button_style is "order" (red Order Now on desktop)
- * to match Figma comp node 17:13043. Home uses "rewards". Switch to "rewards"
- * here if About should mirror Home exactly.
+ * FLAG (confirm): CTA bar uses red Order Now on desktop (Figma comp node 17:13043).
  * ------------------------------------------------------------
  */
 {
@@ -23,10 +21,7 @@
     "cta_bar": {
       "type": "hb-cta-bar",
       "settings": {
-        "button_style": "order",
         "headline": "Eat hamburgers, become a Wizard, get rewards.",
-        "rewards_label": "Rewards",
-        "rewards_link": "/pages/rewards",
         "order_label": "Order Now",
         "order_link": "/pages/order-now"
       }

@@ -2,45 +2,90 @@
   sections/hb-rewards-hero.liquid
   Red illustration hero for the Rewards page.
   Loads hb-rewards.css (once per page — do NOT duplicate in other rewards sections).
-  Figma ref: node 17:10718 (red band) + node 17:10722 (HoodburgerDesigns1 illustration).
+  Figma refs:
+    Desktop artwork → node 136:2311 (Rewards - Desktop 17:10707)
+    Mobile artwork  → node 166:2099 (Rewards - iPhone 17:11078)
 {%- endcomment -%}
 
 {{ 'hb-rewards.css' | asset_url | stylesheet_tag }}
 
-<section class="rewards-hero">
-  <div class="rewards-hero__frame">
-    {%- if section.settings.image != blank -%}
-      {{
-        section.settings.image
-        | image_url: width: 2880
-        | image_tag:
-          class: 'rewards-hero__media',
-          loading: 'eager',
-          fetchpriority: 'high',
-          alt: '',
-          widths: '750, 1100, 1500, 2000, 2880',
-          sizes: '100vw'
-      }}
-    {%- elsif section.settings.fallback_asset != blank -%}
-      <img
-        class="rewards-hero__media"
-        src="{{ section.settings.fallback_asset | asset_url }}"
-        alt=""
-        width="1440"
-        height="887"
-        loading="eager"
-        fetchpriority="high"
-      >
-    {%- endif -%}
+{%- liquid
+  assign hero_desktop = section.settings.fallback_asset | default: 'hb-rewards-hero.jpg'
+  assign hero_mobile  = section.settings.fallback_asset_mobile | default: 'hb-rewards-hero-mobile.jpg'
+  assign hero_alt     = section.settings.hero_alt | default: 'The Round Table'
+-%}
 
-    {%- if section.settings.mobile_cta_label != blank -%}
-      <div class="rewards-hero__mobile-cta">
-        <a class="btn btn--order" href="{{ section.settings.mobile_cta_link | default: '#' }}">
-          {{ section.settings.mobile_cta_label }}
-        </a>
-      </div>
-    {%- endif -%}
+<section class="rewards-hero">
+  <div class="rewards-hero__media-wrap">
+    <picture class="rewards-hero__picture">
+      {%- if section.settings.image != blank and section.settings.image_mobile != blank -%}
+        <source
+          media="(min-width: 1024px)"
+          srcset="
+            {{ section.settings.image | image_url: width: 1500 }} 1500w,
+            {{ section.settings.image | image_url: width: 2000 }} 2000w,
+            {{ section.settings.image | image_url: width: 2880 }} 2880w
+          "
+          sizes="100vw"
+        >
+        {{
+          section.settings.image_mobile
+          | image_url: width: 800
+          | image_tag:
+            class: 'rewards-hero__media',
+            loading: 'eager',
+            fetchpriority: 'high',
+            widths: '393, 786',
+            sizes: '100vw',
+            alt: hero_alt
+        }}
+      {%- elsif section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 2880
+          | image_tag:
+            class: 'rewards-hero__media',
+            loading: 'eager',
+            fetchpriority: 'high',
+            widths: '750, 1100, 1500, 2000, 2880',
+            sizes: '100vw',
+            alt: hero_alt
+        }}
+      {%- elsif section.settings.image_mobile != blank -%}
+        <source media="(min-width: 1024px)" srcset="{{ hero_desktop | asset_url }}">
+        {{
+          section.settings.image_mobile
+          | image_url: width: 800
+          | image_tag:
+            class: 'rewards-hero__media',
+            loading: 'eager',
+            fetchpriority: 'high',
+            widths: '393, 786',
+            sizes: '100vw',
+            alt: hero_alt
+        }}
+      {%- else -%}
+        <source media="(min-width: 1024px)" srcset="{{ hero_desktop | asset_url }}">
+        <img
+          class="rewards-hero__media"
+          src="{{ hero_mobile | asset_url }}"
+          alt="{{ hero_alt | escape }}"
+          width="786"
+          height="590"
+          loading="eager"
+          fetchpriority="high"
+        >
+      {%- endif -%}
+    </picture>
   </div>
+
+  {%- if section.settings.mobile_cta_label != blank -%}
+    <div class="rewards-hero__mobile-cta">
+      <a class="btn btn--order" href="{{ section.settings.mobile_cta_link | default: '#' }}">
+        {{ section.settings.mobile_cta_label }}
+      </a>
+    </div>
+  {%- endif -%}
 </section>
 
 {% schema %}
@@ -50,17 +95,44 @@
   "class": "hb-rewards-hero-section",
   "settings": [
     {
+      "type": "header",
+      "content": "Hero artwork"
+    },
+    {
       "type": "image_picker",
       "id": "image",
-      "label": "Hero illustration",
-      "info": "Upload the castle/characters artwork. Overrides fallback asset below."
+      "label": "Hero artwork — desktop",
+      "info": "Overrides fallback asset below. Figma node 136:2311."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Hero artwork — mobile",
+      "info": "Overrides mobile fallback asset below. Figma node 166:2099."
     },
     {
       "type": "text",
       "id": "fallback_asset",
-      "label": "Fallback asset filename",
-      "info": "Theme asset filename in /assets, e.g. hb-rewards-hero.jpg. Used until image_picker is set.",
+      "label": "Desktop fallback asset filename",
+      "info": "Theme asset in /assets, e.g. hb-rewards-hero.jpg",
       "default": "hb-rewards-hero.jpg"
+    },
+    {
+      "type": "text",
+      "id": "fallback_asset_mobile",
+      "label": "Mobile fallback asset filename",
+      "info": "Theme asset in /assets, e.g. hb-rewards-hero-mobile.jpg",
+      "default": "hb-rewards-hero-mobile.jpg"
+    },
+    {
+      "type": "text",
+      "id": "hero_alt",
+      "label": "Hero alt text",
+      "default": "The Round Table"
+    },
+    {
+      "type": "header",
+      "content": "Mobile CTA"
     },
     {
       "type": "text",

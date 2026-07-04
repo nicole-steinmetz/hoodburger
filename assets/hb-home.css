@@ -8,8 +8,7 @@
 
 /* ----------------------------- TOKENS ----------------------------- */
 :root {
-  /* Brand colours — Hoodburger Brand Standards Manual. LOCKED, no substitutions.
-     (Figma rewards button shows #FF4438 — treated as a comp error; brand red wins.) */
+  /* Brand colours — Hoodburger Brand Standards Manual. LOCKED, no substitutions. */
   --c-red:    #F9423A;   /* Pantone Warm Red C */
   --c-yellow: #FFD100;   /* Pantone 109 C */
   --c-black:  #27251F;   /* Pantone Black 3 C */
@@ -44,6 +43,10 @@
   /* Vertical rhythm between major bands (measured from desktop comp) */
   --space-section: 88px;     /* desktop: yellow bar -> cards, cards -> footer */
   --menu-tabs-offset: 88px;   /* sticky top = site header height (mobile) */
+
+  /* Nav banners (hb-page-hero, hb-story-hero): full bleed under navigation.
+     Inset photos below H1 / third-party embeds use .hb-banner--inset or page CSS. */
+  --page-banner-height: clamp(260px, 40vw, 620px);
 }
 
 /* ----------------------------- RESET ----------------------------- */
@@ -89,7 +92,6 @@ h2, h3, h4, p { margin: 0; }
   transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 .btn--order   { background: var(--c-yellow); color: var(--c-black); }
-.btn--rewards { background: var(--c-red);    color: var(--c-white); }
 .btn--card    { background: var(--c-yellow); color: var(--c-black); }
 .btn--order-mobile { background: var(--c-red); color: var(--c-white); } /* mobile CTA bar */
 
@@ -431,23 +433,49 @@ body.nav-drawer-open {
   .hero__media { display: none; }
 }
 
-/* ----------------------------- PAGE HERO (legal / inner pages) ----------------------------- */
-.page-hero {
+/* ----------------------------- PAGE BANNER (shared hero photos) ----------------------------- */
+/* Rule: hb-banner--full = image directly under nav (edge-to-edge).
+         hb-banner--inset = image below H1 or a third-party embed (contained). */
+.hb-banner {
+  width: 100%;
+  background: var(--c-white);
+}
+.hb-banner--rewards { background: var(--c-red); }
+.hb-banner--rewards .hb-banner__media-wrap { background: var(--c-red); }
+.hb-banner__media-wrap {
   position: relative;
   overflow: hidden;
   background: var(--c-black);
-  width: 100%;
-  height: clamp(320px, 54vw, 779px);
 }
-.page-hero__media {
+.hb-banner__media-wrap :is(picture, img) {
   display: block;
   width: 100%;
   height: 100%;
+}
+.hb-banner__media {
   max-width: none;
   object-fit: cover;
   object-position: center center;
 }
-.page-hero--menu { height: clamp(320px, 52.6vw, 758px); }
+
+/* Full bleed — first band under navigation */
+.hb-banner--full {
+  overflow: hidden;
+}
+.hb-banner--full .hb-banner__media-wrap {
+  width: 100%;
+  border-radius: 0;
+  height: var(--page-banner-height);
+}
+
+/* Inset — below page heading or third-party widget */
+.hb-banner--inset .hb-banner__media-wrap {
+  border-radius: var(--radius);
+  height: var(--page-banner-height);
+}
+
+/* ----------------------------- PAGE HERO (legal / inner pages) ----------------------------- */
+.page-hero { width: 100%; }
 
 /* ----------------------------- LEGAL CONTENT ----------------------------- */
 .legal {
@@ -567,6 +595,7 @@ body.nav-drawer-open {
   position: relative;
   width: 100%;
   overflow: hidden;
+  border-radius: var(--radius);
 }
 .locations__picture {
   display: block;
@@ -612,6 +641,8 @@ body.nav-drawer-open {
 
 /* HB inner pages: full-bleed bands, no Dawn section gaps */
 #MainContent > .shopify-section:has(.page-hero),
+#MainContent > .shopify-section:has(.story-hero),
+#MainContent > .shopify-section:has(.rewards-hero),
 #MainContent > .shopify-section:has(.cta-bar),
 #MainContent > .shopify-section:has(.legal),
 #MainContent > .shopify-section:has(.menu),
@@ -642,9 +673,8 @@ body:has(#MainContent[data-template="page.menu"]) {
   gap: 16px;
   padding-block: 14px;
 }
-/* Mobile shows only the red ORDER NOW button; headline + Rewards appear at desktop */
-.cta-bar__text,
-.cta-bar__rewards { display: none; }
+/* Mobile: red ORDER NOW button only (headline appears at desktop) */
+.cta-bar__text { display: none; }
 .cta-bar__order { display: inline-flex; }
 .cta-bar__text {
   font-family: var(--font-base);
@@ -1172,12 +1202,9 @@ body:has(#MainContent[data-template="page.menu"]) {
     --menu-tabs-offset: 154px;
   }
 
-  /* CTA bar: headline + Rewards return, mobile Order button hides */
+  /* CTA bar: headline + Order Now */
   .cta-bar__text { display: block; }
-  .cta-bar__rewards { display: inline-flex; }
-  .cta-bar__order { display: none; }
-  .cta-bar--order .cta-bar__text { display: block; }
-  .cta-bar--order .cta-bar__order { display: inline-flex; }
+  .cta-bar__order { display: inline-flex; }
 
   .menu-tabs__list { gap: 0 148px; }
   .drinks-brands {

@@ -24,41 +24,32 @@
 
 /* ─────────────────────────────────────────────────────────────────────
    1. HERO  (hb-story-hero)
-   Full-bleed photo. Desktop ratio 1440×964; mobile 393×814.
-   Earn-points badge overlaid lower-left — DESKTOP ONLY (absent from
-   mobile comp node 17:13297).
+   Full-bleed nav banner (hb-banner--full). Earn-points badge overlaid lower-left — DESKTOP ONLY (absent from mobile comp node 17:13297).
    ───────────────────────────────────────────────────────────────────── */
 .story-hero {
-  position: relative;
   width: 100%;
-  background: var(--c-black);
-  overflow: hidden;
+}
+
+.story-hero.hb-banner--full .hb-banner__media-wrap {
+  height: auto;
+  aspect-ratio: 393 / 814;
 }
 
 .story-hero__picture {
-  display: block;
   width: 100%;
-}
-
-.story-hero__img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 393 / 814;        /* mobile comp — node 17:13349 */
-  object-fit: cover;
-  object-position: center center;
+  height: 100%;
 }
 
 .story-hero__badge {
-  display: none;                  /* hidden on mobile per comp */
+  display: none;
 }
 
 @media (min-width: 750px) {
-  .story-hero__img { aspect-ratio: 1440 / 964; }   /* desktop — node 17:13044 */
+  .story-hero.hb-banner--full .hb-banner__media-wrap {
+    aspect-ratio: 1440 / 964;
+    max-height: 964px;
+  }
 
-  /* FLAG (confirm): badge position measured from Figma desktop comp.
-     Node 17:13054 — left 79px, bottom 119px above hero base at 1440×964.
-     Nudge left/bottom if eyeball check differs on staging. */
   .story-hero__badge {
     display: block;
     position: absolute;
@@ -74,7 +65,7 @@
 /* ─────────────────────────────────────────────────────────────────────
    3. ABOUT CARD  (hb-story-about)
    Mobile : image on top, text below — single hairline-bordered card.
-   Desktop: image left (710/1280 = 55.47%) / text right, same bordered card.
+   Desktop: image left (1/3) / text right (2/3), same bordered card.
    Card width caps at 1280px (= 1440 − 2×80 margin), centred.
    ───────────────────────────────────────────────────────────────────── */
 .story-about {
@@ -166,8 +157,8 @@
   }
 
   .story-about__media {
-    flex: 0 0 55.47%;
-    max-width: 55.47%;
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
   }
   .story-about__img {
     aspect-ratio: auto;

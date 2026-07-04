@@ -10,10 +10,7 @@
     "faq-cta": {
       "type": "hb-cta-bar",
       "settings": {
-        "button_style": "order",
         "headline": "Eat hamburgers, become a Wizard, get rewards.",
-        "rewards_label": "ORDER NOW",
-        "rewards_link": "/pages/order-now",
         "order_label": "ORDER NOW",
         "order_link": "/pages/order-now"
       }

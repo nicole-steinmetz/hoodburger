@@ -10,7 +10,6 @@
       "type": "hb-cta-bar",
       "settings": {
         "mobile_only": true,
-        "button_style": "order",
         "headline": "",
         "order_label": "ORDER NOW",
         "order_link": "/pages/order-now"

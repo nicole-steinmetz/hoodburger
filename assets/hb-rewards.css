@@ -16,19 +16,41 @@
    HERO
    ===================================================================== */
 .rewards-hero {
-  background: var(--c-red);
   width: 100%;
   overflow: hidden;
+  background: var(--c-red);
 }
-.rewards-hero__frame {
+.rewards-hero__media-wrap {
+  width: 100%;
+  background: var(--c-red);
+  border-radius: 0;
+  overflow: hidden;
+}
+.rewards-hero__picture {
+  display: block;
   width: 100%;
 }
 .rewards-hero__media {
   display: block;
   width: 100%;
-  height: auto;
   max-width: none;
+  height: auto;
   vertical-align: top;
+}
+
+@media (min-width: 1024px) {
+  .rewards-hero__media-wrap {
+    aspect-ratio: 16 / 9;
+    max-height: 810px;
+  }
+  .rewards-hero__picture,
+  .rewards-hero__media {
+    height: 100%;
+  }
+  .rewards-hero__media {
+    object-fit: cover;
+    object-position: center center;
+  }
 }
 .rewards-hero__mobile-cta {
   display: flex;
@@ -51,6 +73,68 @@
 }
 @media (min-width: 1024px) {
   .rewards-hero__mobile-cta { display: none; }
+}
+
+/* =====================================================================
+   HIGHLIGHTS — founding members + birthday callouts
+   ===================================================================== */
+.rewards-highlights {
+  width: 100%;
+  background: var(--c-white);
+}
+.rewards-highlights__inner {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding: 24px 20px 0;
+  display: grid;
+  gap: 20px;
+}
+.rewards-highlight {
+  border: 1px solid var(--c-black);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  background: var(--c-white);
+  color: var(--c-black);
+}
+.rewards-highlight__heading {
+  font-family: var(--font-base);
+  font-weight: 700;
+  font-size: var(--fs-h3);
+  line-height: 1.2;
+  margin: 0 0 12px;
+  color: var(--c-black);
+}
+.rewards-highlight__body {
+  font-size: var(--fs-p2);
+  line-height: 1.5;
+}
+.rewards-highlight__body p {
+  margin: 0 0 0.75em;
+}
+.rewards-highlight__body p:last-child {
+  margin-bottom: 0;
+}
+.rewards-highlight__body ul {
+  margin: 0;
+  padding-left: 1.25em;
+}
+.rewards-highlight__body li {
+  margin-bottom: 0.35em;
+}
+.rewards-highlight__body li:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 1024px) {
+  .rewards-highlights__inner {
+    padding: 48px var(--margin) 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+  .rewards-highlight {
+    padding: 36px 32px;
+  }
 }
 
 /* =====================================================================
