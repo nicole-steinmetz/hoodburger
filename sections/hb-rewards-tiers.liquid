@@ -14,6 +14,19 @@
     {%- assign img_side  = block.settings.image_side | default: 'right' -%}
     {%- assign fill_pct  = block.settings.progress_fill | default: 46 -%}
     {%- assign icon_asset = block.settings.icon_asset -%}
+    {%- assign character_asset = block.settings.character_asset -%}
+    {%- assign fallback_asset_name = block.settings.fallback_asset -%}
+    {%- if character_asset == blank -%}
+      {%- if tier_id == 'wastelander' -%}
+        {%- assign character_asset = 'hb-rewards-greenlander.png' -%}
+      {%- elsif tier_id == 'citizen' -%}
+        {%- unless fallback_asset_name contains 'castle-hoodburger' -%}
+          {%- assign character_asset = 'hb-rewards-castle-hoodburger.png' -%}
+        {%- endunless -%}
+      {%- elsif tier_id == 'wizard' -%}
+        {%- assign character_asset = 'hb-rewards-wizard-character.png' -%}
+      {%- endif -%}
+    {%- endif -%}
     {%- if icon_asset == blank -%}
       {%- if tier_id == 'wastelander' -%}
         {%- assign icon_asset = 'hoodburger 2.png' -%}
@@ -101,6 +114,7 @@
               block.settings.image
               | image_url: width: 1440
               | image_tag:
+                class: 'rewards-tier__photo',
                 loading: 'lazy',
                 alt: block.settings.tier_name,
                 widths: '500, 750, 1000, 1440',
@@ -108,11 +122,23 @@
             }}
           {%- elsif block.settings.fallback_asset != blank -%}
             <img
+              class="rewards-tier__photo"
               src="{{ block.settings.fallback_asset | asset_url }}"
               alt="{{ block.settings.tier_name }}"
               width="720"
               height="625"
               loading="lazy"
+            >
+          {%- endif -%}
+          {%- if character_asset != blank -%}
+            <img
+              class="rewards-tier__character"
+              src="{{ character_asset | asset_url }}"
+              alt=""
+              width="305"
+              height="331"
+              loading="lazy"
+              aria-hidden="true"
             >
           {%- endif -%}
         </div>
@@ -228,6 +254,16 @@
         },
         {
           "type": "header",
+          "content": "Character overlay"
+        },
+        {
+          "type": "text",
+          "id": "character_asset",
+          "label": "Character asset filename",
+          "info": "Illustration overlaid on the tier photo. Defaults: hb-rewards-greenlander.png, hb-rewards-castle-hoodburger.png, hb-rewards-wizard-character.png."
+        },
+        {
+          "type": "header",
           "content": "Photo"
         },
         {
@@ -263,16 +299,17 @@
           "settings": {
             "tier_id": "wastelander",
             "tier_name": "WASTELANDER",
-            "description": "The staff member glances like they recognise you from somewhere. Though your true identity remains unknown...for now. The path ahead is yours to choose.",
+            "description": "Beginner-level hamburger knowledge and a pocket full of napkins. Your journey begins here, mysterious traveller. We'll have this conversation again.",
             "points_per_dollar": "7 Points Per Dollar",
-            "reward_name": "Win Free Regular Fries",
-            "reward_body": "<p>At around $25 per visit, that's roughly 3 visits — you earn faster than an NPC.</p>",
+            "reward_name": "Win Free Large Fries",
+            "reward_body": "<p>At around $25 per visit, that's roughly 3–4 visits depending on what you order.</p>",
             "progress_fill": 46,
             "milestone_start": "0",
             "milestone_a": "125",
             "milestone_b": "250",
             "milestone_c": "375",
             "milestone_d": "500",
+            "character_asset": "hb-rewards-greenlander.png",
             "image_side": "right",
             "fallback_asset": "hb-hero-fries.jpg"
           }
@@ -282,18 +319,19 @@
           "settings": {
             "tier_id": "citizen",
             "tier_name": "YELLOWSTONE CITIZEN",
-            "description": "You've earned the respect of the village and tales of your exploits echo through the castle and group chats far and wide. Your order has become a badge of honour.",
+            "description": "The staff member glances like they recognise you from somewhere. Though your true identity remains unknown...for now. The path ahead is yours to choose.",
             "points_per_dollar": "10 Points Per Dollar",
             "reward_name": "Free Cheeseburger",
-            "reward_body": "<p>At $25 per visit, that's roughly 4 visits — you earn twice as fast as an NPC.</p><p>Also unlocks:</p><ul><li>Free Tenders 3-pack when you reach Yellowstone</li></ul>",
+            "reward_body": "<p>At $25 per visit, that's roughly 4 visits — twice as fast as NPC.</p><p>Also unlocks:</p><ul><li>Free Cheeseburger on your birthday</li><li>Christmas exclusive menu access before the general public</li></ul>",
             "progress_fill": 47,
             "milestone_start": "0",
             "milestone_a": "250",
             "milestone_b": "500",
             "milestone_c": "750",
             "milestone_d": "1000",
+            "character_asset": "hb-rewards-castle-hoodburger.png",
             "image_side": "left",
-            "fallback_asset": "hb-rewards-citizen.jpg"
+            "fallback_asset": "hb-rewards-citizen-v2.png"
           }
         },
         {
@@ -304,10 +342,11 @@
             "description": "Overpowered hero of Yellowstone Castle. Your eyes glow white whenever Hoodburger is mentioned and when it's all said and done, we'll hang your jersey in the rafters.",
             "points_per_dollar": "12 Points Per Dollar",
             "reward_name": "Free Cheeseburger",
-            "reward_body": "<p>At $25 per visit, that's roughly 3 visits.</p><p>Also unlocks:</p><ul><li>Christmas gift, in-store</li></ul>",
+            "reward_body": "<p>At $25 per visit, that's roughly 3 visits.</p><p>Also unlocks:</p><ul><li>Free Cheeseburger when you reach Wizard</li></ul>",
             "progress_fill": 46,
             "milestone_start": "0",
             "milestone_a": "225",
+            "character_asset": "hb-rewards-wizard-character.png",
             "milestone_b": "450",
             "milestone_c": "675",
             "milestone_d": "900",

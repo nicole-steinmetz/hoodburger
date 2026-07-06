@@ -86,23 +86,29 @@
   width: 100%;
   max-width: var(--maxw);
   margin-inline: auto;
-  padding: 24px 20px 0;
+  padding: 32px 20px 0;
+}
+.rewards-highlights__title {
+  font-family: var(--font-base);
+  font-weight: 700;
+  font-size: clamp(37px, 8vw, 52px);
+  line-height: 1;
+  margin: 0 0 28px;
+  color: var(--c-black);
+}
+.rewards-highlights__grid {
   display: grid;
-  gap: 20px;
+  gap: 32px;
 }
 .rewards-highlight {
-  border: 1px solid var(--c-black);
-  border-radius: var(--radius);
-  padding: 28px 24px;
-  background: var(--c-white);
   color: var(--c-black);
 }
 .rewards-highlight__heading {
   font-family: var(--font-base);
   font-weight: 700;
-  font-size: var(--fs-h3);
-  line-height: 1.2;
-  margin: 0 0 12px;
+  font-size: 23px;
+  line-height: 1.5;
+  margin: 0 0 8px;
   color: var(--c-black);
 }
 .rewards-highlight__body {
@@ -126,14 +132,23 @@
   margin-bottom: 0;
 }
 
+@media (max-width: 1023px) {
+  .rewards-highlight + .rewards-highlight {
+    padding-top: 32px;
+    border-top: 1px solid var(--c-black);
+  }
+}
+
 @media (min-width: 1024px) {
   .rewards-highlights__inner {
     padding: 48px var(--margin) 0;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px;
   }
-  .rewards-highlight {
-    padding: 36px 32px;
+  .rewards-highlights__title {
+    margin-bottom: 40px;
+  }
+  .rewards-highlights__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px 80px;
   }
 }
 
@@ -186,17 +201,17 @@
 
 .rewards-tier__copy {
   order: 2;
-  padding: 50px 42px 54px;
+  padding: 24px 20px 32px;
 }
 
 .rewards-tier__media {
   order: 1;
   position: relative;
   overflow: hidden;
-  min-height: 204px;
-  aspect-ratio: auto;
+  aspect-ratio: 345 / 272;
+  width: 100%;
 }
-.rewards-tier__media img {
+.rewards-tier__photo {
   width: 100%;
   height: 100%;
   max-width: none;
@@ -204,14 +219,51 @@
   object-fit: cover;
   object-position: center center;
 }
+.rewards-tier__character {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  width: auto;
+  max-width: 55%;
+  height: auto;
+  max-height: 92%;
+  display: block;
+  object-fit: contain;
+  object-position: right bottom;
+  pointer-events: none;
+}
+.rewards-tier--wastelander .rewards-tier__character {
+  max-width: 47%;
+  max-height: 90%;
+  right: 2%;
+}
+.rewards-tier--citizen .rewards-tier__photo {
+  object-position: center center;
+}
+.rewards-tier--citizen .rewards-tier__character {
+  width: auto;
+  height: 96%;
+  max-width: 50%;
+  max-height: none;
+  right: 0;
+  bottom: 0;
+  object-fit: contain;
+  object-position: right bottom;
+}
+.rewards-tier--wizard .rewards-tier__character {
+  max-width: 49%;
+  max-height: 86%;
+  right: 0;
+}
 
 /* ---- Tier header (badge above title on mobile; inline on desktop) ---- */
 .tier-header {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 21px;
-  margin-bottom: 44px;
+  gap: 8px;
+  margin-bottom: 16px;
   width: 100%;
   max-width: 538px;
 }
@@ -266,7 +318,7 @@
   font-size: var(--fs-p2);
   line-height: 1.5;
   letter-spacing: 0;
-  margin: 0 0 34px;
+  margin: 0 0 24px;
   max-width: 466px;
 }
 
@@ -350,7 +402,7 @@
   font-weight: 700;
   font-size: var(--fs-h3);
   line-height: 1;
-  margin: 48px 0 8px;
+  margin: 32px 0 8px;
 }
 .tier-reward__body {
   font-size: var(--fs-p2);

@@ -92,6 +92,7 @@ h2, h3, h4, p { margin: 0; }
   transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 .btn--order   { background: var(--c-yellow); color: var(--c-black); }
+.btn--rewards { background: var(--c-red);    color: var(--c-white); }
 .btn--card    { background: var(--c-yellow); color: var(--c-black); }
 .btn--order-mobile { background: var(--c-red); color: var(--c-white); } /* mobile CTA bar */
 
@@ -673,8 +674,9 @@ body:has(#MainContent[data-template="page.menu"]) {
   gap: 16px;
   padding-block: 14px;
 }
-/* Mobile: red ORDER NOW button only (headline appears at desktop) */
-.cta-bar__text { display: none; }
+/* Mobile shows only the red ORDER NOW button; headline + Rewards appear at desktop */
+.cta-bar__text,
+.cta-bar__rewards { display: none; }
 .cta-bar__order { display: inline-flex; }
 .cta-bar__text {
   font-family: var(--font-base);
@@ -840,7 +842,7 @@ body:has(#MainContent[data-template="page.menu"]) {
 .menu__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 36px 24px;
+  gap: 29px 24px;
 }
 .menu-card {
   text-align: center;
@@ -848,17 +850,20 @@ body:has(#MainContent[data-template="page.menu"]) {
 .menu-card__media {
   aspect-ratio: 1;
   overflow: hidden;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 .menu-card__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center bottom;
 }
 @media (max-width: 1023px) {
   .menu-card__media {
     width: 80%;
     margin-inline: auto;
+    margin-bottom: 12px;
+    aspect-ratio: 1 / 0.92;
   }
 }
 .menu-card__title {
@@ -871,7 +876,7 @@ body:has(#MainContent[data-template="page.menu"]) {
 .menu-card__desc {
   font-size: var(--fs-p2);
   line-height: 1.5;
-  margin-bottom: 64px;
+  margin-bottom: 32px;
   margin-inline: auto;
 }
 .menu-card__badges {
@@ -885,7 +890,7 @@ body:has(#MainContent[data-template="page.menu"]) {
 }
 @media (max-width: 1023px) {
   .menu-card__title + .menu-card__badges {
-    margin-bottom: 36px;
+    margin-bottom: 29px;
   }
 }
 .menu-badge {
@@ -1202,9 +1207,12 @@ body:has(#MainContent[data-template="page.menu"]) {
     --menu-tabs-offset: 154px;
   }
 
-  /* CTA bar: headline + Order Now */
+  /* CTA bar: headline + Rewards return, mobile Order button hides */
   .cta-bar__text { display: block; }
-  .cta-bar__order { display: inline-flex; }
+  .cta-bar__rewards { display: inline-flex; }
+  .cta-bar__order { display: none; }
+  .cta-bar--order .cta-bar__text { display: block; }
+  .cta-bar--order .cta-bar__order { display: inline-flex; }
 
   .menu-tabs__list { gap: 0 148px; }
   .drinks-brands {
@@ -1226,7 +1234,7 @@ body:has(#MainContent[data-template="page.menu"]) {
   .menu-dietary__text { margin-bottom: 24px; }
   .menu__grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 128px var(--gutter);
+    gap: 102px var(--gutter);
     align-items: start;
   }
   .menu-card { text-align: center; }

@@ -1,21 +1,28 @@
 {%- comment -%}
   sections/hb-rewards-highlights.liquid
-  Founding Members + Birthday callouts on the Rewards page.
+  Rewards Program intro — founding members + birthday callouts.
+  Figma refs: desktop 166:2119–166:2121, mobile 166:2122–166:2125.
   Styled by hb-rewards.css (loaded via hb-rewards-hero).
 {%- endcomment -%}
 
 <section class="rewards-highlights">
   <div class="rewards-highlights__inner">
-    {%- for block in section.blocks -%}
-      <article class="rewards-highlight" {{ block.shopify_attributes }}>
-        {%- if block.settings.heading != blank -%}
-          <h2 class="rewards-highlight__heading">{{ block.settings.heading }}</h2>
-        {%- endif -%}
-        {%- if block.settings.body != blank -%}
-          <div class="rewards-highlight__body rte">{{ block.settings.body }}</div>
-        {%- endif -%}
-      </article>
-    {%- endfor -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="rewards-highlights__title">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="rewards-highlights__grid">
+      {%- for block in section.blocks -%}
+        <article class="rewards-highlight" {{ block.shopify_attributes }}>
+          {%- if block.settings.heading != blank -%}
+            <h3 class="rewards-highlight__heading">{{ block.settings.heading }}</h3>
+          {%- endif -%}
+          {%- if block.settings.body != blank -%}
+            <div class="rewards-highlight__body rte">{{ block.settings.body }}</div>
+          {%- endif -%}
+        </article>
+      {%- endfor -%}
+    </div>
   </div>
 </section>
 
@@ -25,6 +32,14 @@
   "tag": "section",
   "class": "hb-rewards-highlights-section",
   "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "Rewards Program"
+    }
+  ],
   "blocks": [
     {
       "type": "highlight",
@@ -46,11 +61,14 @@
   "presets": [
     {
       "name": "HB Rewards Highlights",
+      "settings": {
+        "heading": "Rewards Program"
+      },
       "blocks": [
         {
           "type": "highlight",
           "settings": {
-            "heading": "⚡ 2026 Founding Members — the fast track",
+            "heading": "2026 Founding Members — the fast track",
             "body": "<p>Join in 2026 and you skip NPC entirely — you start as a Wastelander, and earn double points from 1 July to 30 September to power up the ranks. It's the fastest the climb will ever be. From 2027, everyone starts at the bottom.</p>"
           }
         },

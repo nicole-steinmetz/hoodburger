@@ -10,8 +10,8 @@
 {{ 'hb-rewards.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
-  assign hero_desktop = section.settings.fallback_asset | default: 'hb-rewards-hero.jpg'
-  assign hero_mobile  = section.settings.fallback_asset_mobile | default: 'hb-rewards-hero-mobile.jpg'
+  assign hero_desktop = section.settings.fallback_asset | default: 'hb-rewards-hero.png'
+  assign hero_mobile  = section.settings.fallback_asset_mobile | default: 'hb-rewards-hero-mobile.png'
   assign hero_alt     = section.settings.hero_alt | default: 'The Round Table'
 -%}
 
@@ -114,15 +114,15 @@
       "type": "text",
       "id": "fallback_asset",
       "label": "Desktop fallback asset filename",
-      "info": "Theme asset in /assets, e.g. hb-rewards-hero.jpg",
-      "default": "hb-rewards-hero.jpg"
+      "info": "Theme asset in /assets, e.g. hb-rewards-hero.png",
+      "default": "hb-rewards-hero.png"
     },
     {
       "type": "text",
       "id": "fallback_asset_mobile",
       "label": "Mobile fallback asset filename",
-      "info": "Theme asset in /assets, e.g. hb-rewards-hero-mobile.jpg",
-      "default": "hb-rewards-hero-mobile.jpg"
+      "info": "Theme asset in /assets, e.g. hb-rewards-hero-mobile.png",
+      "default": "hb-rewards-hero-mobile.png"
     },
     {
       "type": "text",
