@@ -13,45 +13,20 @@
 }
 
 /* =====================================================================
-   HERO
+   HERO — shared nav banner height (--page-banner-height from hb-home.css)
    ===================================================================== */
-.rewards-hero {
-  width: 100%;
-  overflow: hidden;
-  background: var(--c-red);
-}
-.rewards-hero__media-wrap {
-  width: 100%;
-  background: var(--c-red);
-  border-radius: 0;
-  overflow: hidden;
-}
 .rewards-hero__picture {
   display: block;
   width: 100%;
-}
-.rewards-hero__media {
-  display: block;
-  width: 100%;
-  max-width: none;
-  height: auto;
-  vertical-align: top;
+  height: 100%;
 }
 
-@media (min-width: 1024px) {
-  .rewards-hero__media-wrap {
-    aspect-ratio: 16 / 9;
-    max-height: 810px;
-  }
-  .rewards-hero__picture,
-  .rewards-hero__media {
-    height: 100%;
-  }
-  .rewards-hero__media {
-    object-fit: cover;
-    object-position: center center;
-  }
+/* Illustration artwork: fit inside the banner band without cropping */
+.rewards-hero.hb-banner--rewards .hb-banner__media {
+  object-fit: contain;
+  object-position: center center;
 }
+
 .rewards-hero__mobile-cta {
   display: flex;
   justify-content: center;
@@ -96,9 +71,27 @@
   margin: 0 0 28px;
   color: var(--c-black);
 }
+.rewards-highlights__layout {
+  display: block;
+}
+.rewards-highlights__copy {
+  max-width: 627px;
+}
 .rewards-highlights__grid {
-  display: grid;
-  gap: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.rewards-highlights__media {
+  display: none;
+}
+.rewards-highlights__photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  object-fit: cover;
+  object-position: center 22%;
 }
 .rewards-highlight {
   color: var(--c-black);
@@ -124,8 +117,11 @@
 .rewards-highlight__body ul {
   margin: 0;
   padding-left: 1.25em;
+  list-style: disc;
+  list-style-position: outside;
 }
 .rewards-highlight__body li {
+  display: list-item;
   margin-bottom: 0.35em;
 }
 .rewards-highlight__body li:last-child {
@@ -133,22 +129,50 @@
 }
 
 @media (max-width: 1023px) {
+  .rewards-highlights__inner {
+    padding: 67px 24px 95px;
+  }
+  .rewards-highlights__title {
+    font-size: 52px;
+    margin-bottom: 40px;
+  }
   .rewards-highlight + .rewards-highlight {
-    padding-top: 32px;
+    margin-top: 48px;
+    padding-top: 48px;
     border-top: 1px solid var(--c-black);
   }
 }
 
 @media (min-width: 1024px) {
   .rewards-highlights__inner {
-    padding: 48px var(--margin) 0;
+    padding: 90px var(--margin) 94px;
   }
   .rewards-highlights__title {
-    margin-bottom: 40px;
+    margin-bottom: 68px;
   }
-  .rewards-highlights__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 48px 80px;
+  .rewards-highlights__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 627px) minmax(0, 465px);
+    gap: 0 188px;
+    align-items: start;
+    justify-content: start;
+  }
+  .rewards-highlights__media {
+    display: block;
+    width: 100%;
+    max-width: 465px;
+    margin-top: 0;
+    justify-self: end;
+    margin-left: auto;
+  }
+  .rewards-highlights__photo {
+    aspect-ratio: 465 / 536;
+    max-height: 536px;
+  }
+  .rewards-highlight + .rewards-highlight {
+    margin-top: 62px;
+    padding-top: 56px;
+    border-top: 1px solid var(--c-black);
   }
 }
 
@@ -207,54 +231,85 @@
 .rewards-tier__media {
   order: 1;
   position: relative;
-  overflow: hidden;
-  aspect-ratio: 345 / 272;
+  overflow: visible;
   width: 100%;
-}
-.rewards-tier__photo {
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  display: block;
-  object-fit: cover;
-  object-position: center center;
 }
 .rewards-tier__character {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-  width: auto;
-  max-width: 55%;
-  height: auto;
-  max-height: 92%;
   display: block;
+  width: auto;
+  height: auto;
   object-fit: contain;
-  object-position: right bottom;
   pointer-events: none;
 }
-.rewards-tier--wastelander .rewards-tier__character {
-  max-width: 47%;
-  max-height: 90%;
-  right: 2%;
-}
-.rewards-tier--citizen .rewards-tier__photo {
-  object-position: center center;
-}
-.rewards-tier--citizen .rewards-tier__character {
-  width: auto;
-  height: 96%;
-  max-width: 50%;
-  max-height: none;
-  right: 0;
-  bottom: 0;
-  object-fit: contain;
-  object-position: right bottom;
-}
-.rewards-tier--wizard .rewards-tier__character {
-  max-width: 49%;
-  max-height: 86%;
-  right: 0;
+
+/* Mobile tier cards — character stacked on colour field, no background photo (Figma 17:11078) */
+@media (max-width: 1023px) {
+  .rewards-tiers {
+    padding: 0 24px 48px;
+  }
+
+  .rewards-tier {
+    margin-bottom: 38px;
+  }
+  .rewards-tier:last-child {
+    margin-bottom: 0;
+  }
+
+  .rewards-tier__media {
+    aspect-ratio: unset;
+    height: auto;
+    overflow: visible;
+    padding-inline: 29px;
+  }
+
+  .rewards-tier--wastelander .rewards-tier__media {
+    padding-top: 56px;
+  }
+  .rewards-tier--citizen .rewards-tier__media {
+    padding-top: 36px;
+  }
+  .rewards-tier--wizard .rewards-tier__media {
+    padding-top: 45px;
+  }
+
+  .rewards-tier__character {
+    position: static;
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    object-fit: contain;
+    object-position: left top;
+    pointer-events: none;
+  }
+
+  .rewards-tier--wastelander .rewards-tier__character {
+    width: 180px;
+    height: 229px;
+    object-fit: contain;
+  }
+  .rewards-tier--citizen .rewards-tier__character {
+    width: 196px;
+    height: 196px;
+    object-fit: contain;
+  }
+  .rewards-tier--wizard .rewards-tier__character {
+    width: 228px;
+    height: 247px;
+    object-fit: contain;
+  }
+
+  .rewards-tier__copy {
+    padding: 38px 29px 40px;
+  }
+  .rewards-tier--citizen .rewards-tier__copy {
+    padding-top: 27px;
+  }
+  .rewards-tier--wizard .rewards-tier__copy {
+    padding-top: 28px;
+  }
 }
 
 /* ---- Tier header (badge above title on mobile; inline on desktop) ---- */
@@ -424,34 +479,75 @@
   content: "- ";
 }
 
+/* Mobile tier typography + section spacing (Figma 17:11078) */
+@media (max-width: 1023px) {
+  .tier-header {
+    gap: 29px;
+    margin-bottom: 18px;
+  }
+
+  .tier-description {
+    margin-bottom: 47px;
+  }
+
+  .tier-reward__name {
+    margin: 21px 0 8px;
+  }
+}
+
 /* =====================================================================
-   DESKTOP  (>= 1024px)
+   DESKTOP  (>= 1024px) — Figma 17:10707
    ===================================================================== */
 @media (min-width: 1024px) {
   .rewards-tiers {
-    padding: 48px var(--margin);
+    padding: 0 var(--margin) 64px;
   }
 
   .rewards-tier {
-    margin-bottom: 24px;
+    margin-bottom: 64px;
+  }
+
+  .rewards-tier--citizen {
+    margin-bottom: 56px;
+  }
+
+  .rewards-tier:last-child {
+    margin-bottom: 0;
+  }
+
+  .rewards-tier {
+    overflow: visible;
   }
 
   .rewards-tier__inner {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    /* Copy ~2/3, character ~1/3 (Figma comp proportions) */
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
     grid-template-rows: 1fr;
-    min-height: 520px;
+    align-items: stretch;
+    min-height: 625px;
+    overflow: visible;
+  }
+
+  .rewards-tier--citizen .rewards-tier__inner {
+    min-height: 627px;
+  }
+
+  .rewards-tier--wizard .rewards-tier__inner {
+    min-height: 593px;
   }
 
   .rewards-tier__copy {
     order: unset;
     grid-column: 1;
     grid-row: 1;
-    padding: 56px max(48px, calc((100% - 538px) / 2));
+    padding: 56px 48px 56px 81px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    align-self: stretch;
+    min-height: 0;
   }
 
   .rewards-tier__copy > * {
@@ -459,12 +555,21 @@
     max-width: 538px;
   }
 
+  .rewards-tier--photo-left .rewards-tier__copy > * {
+    max-width: 100%;
+  }
+
+  .rewards-tier--citizen .tier-description,
+  .rewards-tier--citizen .tier-reward__body {
+    max-width: 629px;
+  }
+
   .tier-header {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     gap: 12px 16px;
-    margin-bottom: 24px;
+    margin-bottom: 44px;
   }
 
   .tier-name {
@@ -473,11 +578,11 @@
   }
 
   .tier-description {
-    margin-bottom: 36px;
+    margin-bottom: 56px;
   }
 
   .tier-progress {
-    margin-bottom: 28px;
+    margin-bottom: 49px;
   }
 
   .tier-progress__rail {
@@ -536,20 +641,70 @@
     order: unset;
     grid-column: 2;
     grid-row: 1;
-    aspect-ratio: unset;
-    min-height: unset;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    align-self: stretch;
+    height: 100%;
+    overflow: visible;
+    padding: 0 42px 0 16px;
+    min-height: 0;
   }
 
-  /* Photo-left variant: image col 1 (1/3), copy col 2 (2/3) */
+  .rewards-tier__character {
+    position: static;
+    flex-shrink: 0;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: center center;
+    margin: 0;
+  }
+
+  /* Figma bounding boxes — height-led sizing; citizen largest per comp */
+  .rewards-tier--wastelander .rewards-tier__character {
+    height: min(450px, 72%);
+    width: auto;
+    max-width: 100%;
+  }
+
+  .rewards-tier--wastelander .rewards-tier__media {
+    padding-right: 42px;
+  }
+
+  .rewards-tier--citizen .rewards-tier__character {
+    height: min(503px, 80%);
+    width: auto;
+    max-width: 100%;
+  }
+
+  .rewards-tier--wizard .rewards-tier__character {
+    height: min(427px, 72%);
+    width: auto;
+    max-width: 100%;
+  }
+
+  .rewards-tier--wizard .rewards-tier__media {
+    padding-right: 70px;
+  }
+
+  /* Photo-left variant: character ~1/3 left, copy ~2/3 right (Citizen) */
   .rewards-tier--photo-left .rewards-tier__inner {
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
   }
   .rewards-tier--photo-left .rewards-tier__copy {
     grid-column: 2;
-    padding: 56px max(48px, calc((100% - 538px) / 2));
+    padding: 56px 80px 56px 50px;
   }
   .rewards-tier--photo-left .rewards-tier__media {
     grid-column: 1;
+    justify-content: flex-start;
+    padding: 0 16px 0 22px;
+  }
+
+  .rewards-tc {
+    padding-top: 116px;
+    padding-bottom: 96px;
   }
 }
 
@@ -560,6 +715,12 @@
   padding-block: 48px 72px;
   background: var(--c-white);
   color: var(--c-black);
+}
+
+@media (max-width: 1023px) {
+  .rewards-tc {
+    padding-top: 77px;
+  }
 }
 
 .rewards-tc__heading {
@@ -594,12 +755,12 @@
   font: inherit;
 }
 
-/* Dark header for open item — stays within container, no edge bleed */
+/* Dark header for open item — top corners only; body panel below */
 .tc-item__toggle[aria-expanded="true"] {
   background: var(--c-black);
   color: var(--c-white);
   padding: 20px 16px;
-  border-radius: var(--radius);
+  border-radius: var(--radius) var(--radius) 0 0;
 }
 
 .tc-item__marker {
@@ -638,6 +799,8 @@
 .tc-item__body { padding-bottom: 20px; }
 .tc-item__toggle[aria-expanded="true"] + .tc-item__body {
   padding: 45px 16px 45px;
+  background: var(--c-cream);
+  border-radius: 0 0 var(--radius) var(--radius);
 }
 .tc-item__body[hidden] { display: none; }
 .tc-item__body :is(ul, ol) {
@@ -676,18 +839,24 @@
   font-family: var(--font-base);
   font-weight: 700;
 }
-.tc-item__body table :is(th, td):last-child {
+.tc-item__body table :is(th, td):not(:first-child),
+.tc-item__body .tc-tier-table thead tr:last-child th {
   text-align: right;
+}
+.tc-item__body .tc-tier-table thead tr:first-child th:not([rowspan]) {
+  border-bottom: 0;
+  padding-bottom: 4px;
+}
+.tc-item__body table thead tr:first-child th[rowspan] {
+  vertical-align: bottom;
+}
+.tc-item__body table thead tr:last-child th {
+  padding-top: 4px;
 }
 .tc-item__body table tbody tr:last-child :is(th, td) {
   border-bottom: 0;
 }
 
-@media (min-width: 1024px) {
-  .rewards-tc { padding-block: 64px 96px; }
-}
-
-/* ---- Reduced motion ---- */
 @media (prefers-reduced-motion: reduce) {
   .tc-item__icon { transition: none; }
 }

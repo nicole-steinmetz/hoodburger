@@ -3,9 +3,8 @@
   Loyalty tier cards — Wastelander, Yellowstone Citizen, Wizard.
   3 blocks of type "tier". Styled by hb-rewards.css (loaded via hb-rewards-hero).
   Figma refs:
-    Wastelander  node 17:10749 / photo hb-hero-fries.jpg (Figma 17:10719) — green bg, photo-right
-    Citizen      node 17:10719 — yellow bg #FFD100, photo-left, text-right
-    Wizard       node 17:10733 — bronze bg #B79268, text-left, photo-right
+    Desktop → node 17:10707 (character beside copy, no tier photos)
+    Mobile  → node 17:11078 (character stacked on colour field)
 {%- endcomment -%}
 
 <div class="rewards-tiers">
@@ -40,6 +39,21 @@
     {%- else -%}
       {%- assign icon_w = 63 -%}
       {%- assign icon_h = 105 -%}
+    {%- endif -%}
+
+    {%- comment -%} Figma display box dimensions (17:10707 desktop, 17:11078 mobile) {%- endcomment -%}
+    {%- if tier_id == 'wastelander' -%}
+      {%- assign char_w = 180 -%}
+      {%- assign char_h = 229 -%}
+    {%- elsif tier_id == 'citizen' -%}
+      {%- assign char_w = 196 -%}
+      {%- assign char_h = 196 -%}
+    {%- elsif tier_id == 'wizard' -%}
+      {%- assign char_w = 228 -%}
+      {%- assign char_h = 247 -%}
+    {%- else -%}
+      {%- assign char_w = 305 -%}
+      {%- assign char_h = 331 -%}
     {%- endif -%}
 
     <div
@@ -107,41 +121,20 @@
 
         </div>{%- comment -%} /.rewards-tier__copy {%- endcomment -%}
 
-        {%- comment -%} ── Media column ───────────────────────────────── {%- endcomment -%}
+        {%- comment -%} ── Media column (character illustration only) ── {%- endcomment -%}
+        {%- if character_asset != blank -%}
         <div class="rewards-tier__media">
-          {%- if block.settings.image != blank -%}
-            {{
-              block.settings.image
-              | image_url: width: 1440
-              | image_tag:
-                class: 'rewards-tier__photo',
-                loading: 'lazy',
-                alt: block.settings.tier_name,
-                widths: '500, 750, 1000, 1440',
-                sizes: '(min-width: 1024px) 50vw, 100vw'
-            }}
-          {%- elsif block.settings.fallback_asset != blank -%}
-            <img
-              class="rewards-tier__photo"
-              src="{{ block.settings.fallback_asset | asset_url }}"
-              alt="{{ block.settings.tier_name }}"
-              width="720"
-              height="625"
-              loading="lazy"
-            >
-          {%- endif -%}
-          {%- if character_asset != blank -%}
-            <img
-              class="rewards-tier__character"
-              src="{{ character_asset | asset_url }}"
-              alt=""
-              width="305"
-              height="331"
-              loading="lazy"
-              aria-hidden="true"
-            >
-          {%- endif -%}
+          <img
+            class="rewards-tier__character"
+            src="{{ character_asset | asset_url }}"
+            alt=""
+            width="{{ char_w }}"
+            height="{{ char_h }}"
+            loading="lazy"
+            aria-hidden="true"
+          >
         </div>
+        {%- endif -%}
 
       </div>{%- comment -%} /.rewards-tier__inner {%- endcomment -%}
     </div>{%- comment -%} /.rewards-tier {%- endcomment -%}
